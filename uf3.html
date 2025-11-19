@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>UF3 - Transformación digital de las empresas gracias a las THD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0b1120;
+      color: #e5e7eb;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1d4ed8, #22c55e);
+      color: #f9fafb;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #0b1120;
+      background: #e5e7eb;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 16px auto 24px;
+      padding: 0 16px;
+    }
+
+    section {
+      background: #020617;
+      border-radius: 14px;
+      padding: 14px 16px 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(148,163,184,.4);
+      box-shadow: 0 12px 30px rgba(15,23,42,.7);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #bfdbfe;
+    }
+
+    h3 {
+      margin-bottom: 4px;
+      color: #93c5fd;
+      font-size: 1rem;
+    }
+
+    ul {
+      margin-top: 4px;
+      padding-left: 20px;
+      font-size: 0.94rem;
+    }
+
+    p {
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.2);
+      color: #bfdbfe;
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+    }
+
+    /* TEST */
+    .question {
+      border: 1px solid rgba(148,163,184,.6);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background: #020617;
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+
+    .question.correct {
+      border-color: #22c55e;
+      background-color: rgba(22,163,74,.15);
+    }
+
+    .question.incorrect {
+      border-color: #ef4444;
+      background-color: rgba(248,113,113,.15);
+    }
+
+    .question h3 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .options label {
+      display: block;
+      margin: 2px 0;
+      cursor: pointer;
+      font-size: 0.92rem;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 6px;
+    }
+
+    #controls {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    #btn-correct {
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 600;
+    }
+
+    #btn-reset {
+      background: #e5e7eb;
+      color: #020617;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    small {
+      color: #9ca3af;
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>UF3 · Transformación digital de las empresas gracias a las THD</h1>
+      <p>Temario resumido + cuestionario interactivo</p>
+    </div>
+    <a href="index.html">← Volver al índice</a>
+  </header>
+
+  <main>
+    <!-- TEMARIO -->
+    <section id="temario">
+      <span class="badge">Temario resumido</span>
+      <h2>Resumen de la UF3</h2>
+      <p><strong>Tecnología inteligente</strong>: combina IoT, IA, big data, nube y biometría para crear
+      entornos conectados, eficientes y autónomos.</p>
+
+      <h3>Edificios inteligentes</h3>
+      <ul>
+        <li>Usan sensores e IoT para controlar iluminación, climatización, seguridad y energía.</li>
+        <li>Objetivo: eficiencia energética, confort y sostenibilidad.</li>
+      </ul>
+
+      <h3>Empresas inteligentes (Industria 4.0)</h3>
+      <ul>
+        <li>Digitalizan procesos: producción, RRHH, atención al cliente, cadena de suministro.</li>
+        <li>Industria 4.0: fábricas inteligentes conectadas, automatizadas y basadas en datos.</li>
+      </ul>
+
+      <h3>Hogares inteligentes (domótica)</h3>
+      <ul>
+        <li>Control remoto de luces, persianas, riego, cámaras, cerraduras, electrodomésticos.</li>
+        <li>Uso de asistentes de voz (Alexa, Siri, Google Assistant).</li>
+        <li>Ventajas: comodidad, seguridad y eficiencia energética.</li>
+      </ul>
+
+      <h3>Ciudades inteligentes</h3>
+      <ul>
+        <li>Monitorización del aire, tráfico, agua, residuos y alumbrado.</li>
+        <li>Transporte público conectado, parquímetros inteligentes, participación ciudadana.</li>
+        <li>Objetivo: mejorar la calidad de vida y la sostenibilidad.</li>
+      </ul>
+
+      <h3>Principales THD y usos</h3>
+      <ul>
+        <li><strong>IA</strong>: automatización, diagnósticos, conducción autónoma.</li>
+        <li><strong>Robots inteligentes</strong>: cobots, drones, robots-patrulla, robots cirujanos.</li>
+        <li><strong>Impresión 3D</strong>: prototipado, fabricación personalizada, arquitectura.</li>
+        <li><strong>IoT</strong>: domótica, fábricas inteligentes, agricultura de precisión.</li>
+        <li><strong>VR/AR</strong>: formación, diseño, entretenimiento.</li>
+        <li><strong>Blockchain</strong>: criptomonedas, contratos inteligentes, voto electrónico.</li>
+        <li><strong>Cloud</strong>: almacenamiento y acceso remoto a datos y aplicaciones.</li>
+        <li><strong>5G</strong>: alta velocidad y baja latencia para tiempo real y muchos dispositivos.</li>
+      </ul>
+    </section>
+
+    <!-- CUESTIONARIO -->
+    <section id="test">
+      <span class="badge">Cuestionario interactivo</span>
+      <h2>Test UF3 · 25 preguntas</h2>
+      <p><small>Marca una respuesta por pregunta y pulsa <strong>“Corregir test”</strong> al final.</small></p>
+
+      <!-- AQUÍ VAN LAS 25 PREGUNTAS (LAS QUE YA TENEMOS) -->
+
+      <div class="question" data-correct="b">
+        <h3>1. Es una función de los robots de patrulla:</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a"> Cuidar de niños en escuelas infantiles para evitar que se hagan daño.</label>
+          <label><input type="radio" name="q1" value="b"> Vigilar zonas y alertar sobre actividades sospechosas.</label>
+          <label><input type="radio" name="q1" value="c"> Entregar paquetes en entornos urbanos.</label>
+          <label><input type="radio" name="q1" value="d"> Ayudar a clientes en tiendas y centros de servicio.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>2. ¿Cuál de las siguientes afirmaciones describe mejor una característica clave de la seguridad en los hogares inteligentes?</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a"> Los dispositivos de seguridad en los hogares inteligentes no pueden integrarse con otros sistemas de seguridad, como alarmas de incendio o cámaras de vigilancia.</label>
+          <label><input type="radio" name="q2" value="b"> La encriptación de datos y la autenticación de usuarios son medidas comunes para proteger la seguridad en los hogares inteligentes.</label>
+          <label><input type="radio" name="q2" value="c"> Los sistemas de seguridad en los hogares inteligentes no pueden ser controlados de forma remota.</label>
+          <label><input type="radio" name="q2" value="d"> Los hogares inteligentes son inherentemente menos seguros que los hogares convencionales.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="d">
+        <h3>3. El Internet de las cosas es conocido especialmente por su aplicación en...</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a"> La construcción.</label>
+          <label><input type="radio" name="q3" value="b"> La agricultura.</label>
+          <label><input type="radio" name="q3" value="c"> La educación.</label>
+          <label><input type="radio" name="q3" value="d"> Los hogares.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="d">
+        <h3>4. La inteligencia artificial permite...</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> Reemplazar a los humanos en todos los trabajos.</label>
+          <label><input type="radio" name="q4" value="b"> Tomar decisiones autónomas, aunque no se disponga de datos.</label>
+          <label><input type="radio" name="q4" value="c"> Prever el futuro de manera precisa.</label>
+          <label><input type="radio" name="q4" value="d"> Aprender por sí misma o mediante el análisis y el procesamiento de datos.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>5. ¿A qué se denomina “Industria 4.0”?</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> Cuando las tecnologías se aplican en procesos relacionados con la educación.</label>
+          <label><input type="radio" name="q5" value="b"> Cuando las tecnologías se aplican en procesos relacionados con el comercio.</label>
+          <label><input type="radio" name="q5" value="c"> Cuando las tecnologías se aplican en procesos de fabricación industrial.</label>
+          <label><input type="radio" name="q5" value="d"> Cuando las tecnologías se aplican en procesos relacionados con la sanidad.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>6. Alexa, Siri y Google Assistant son:</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="a"> Sistemas de seguridad inteligentes.</label>
+          <label><input type="radio" name="q6" value="b"> Sistemas de blockchain.</label>
+          <label><input type="radio" name="q6" value="c"> Asistentes de voz.</label>
+          <label><input type="radio" name="q6" value="d"> Electrodomésticos inteligentes.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>7. ¿Qué tecnología se emplea para la creación de objetos tridimensionales a partir de modelos digitales?</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="a"> Impresión 3D.</label>
+          <label><input type="radio" name="q7" value="b"> Realidad virtual.</label>
+          <label><input type="radio" name="q7" value="c"> Internet de las cosas.</label>
+          <label><input type="radio" name="q7" value="d"> Blockchain.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>8. Pokémon GO es un videojuego que utiliza:</h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="a"> La impresión 3D.</label>
+          <label><input type="radio" name="q8" value="b"> Realidad virtual.</label>
+          <label><input type="radio" name="q8" value="c"> Realidad aumentada.</label>
+          <label><input type="radio" name="q8" value="d"> La Inteligencia artificial.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>9. ¿Qué función cumple la tecnología en el modelo de ciudad inteligente?</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="a"> Limitar el desarrollo sostenible.</label>
+          <label><input type="radio" name="q9" value="b"> Mejorar la calidad de vida de sus ciudadanos.</label>
+          <label><input type="radio" name="q9" value="c"> Aumentar el consumo de recursos.</label>
+          <label><input type="radio" name="q9" value="d"> Reducir la seguridad.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>10. ¿Cuál de las siguientes definiciones describe correctamente el concepto de domótica?</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="a"> Tecnología para venta online.</label>
+          <label><input type="radio" name="q10" value="b"> Automatización de edificios comerciales.</label>
+          <label><input type="radio" name="q10" value="c"> Uso de sistemas integrados para controlar y automatizar dispositivos del hogar.</label>
+          <label><input type="radio" name="q10" value="d"> Tecnología en agricultura para optimizar cultivos.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>11. Los robots colaborativos (cobots):</h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="a"> Ayudan a la rehabilitación con ejercicios guiados.</label>
+          <label><input type="radio" name="q11" value="b"> Trabajan junto a humanos en entornos de producción seguros.</label>
+          <label><input type="radio" name="q11" value="c"> Se emplean en exploración espacial.</label>
+          <label><input type="radio" name="q11" value="d"> Solo realizan tareas autónomas.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="d">
+        <h3>12. ¿Qué es la biometría?</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="a"> Un sistema de pagos.</label>
+          <label><input type="radio" name="q12" value="b"> Un método de pago digital.</label>
+          <label><input type="radio" name="q12" value="c"> Un tipo de realidad aumentada.</label>
+          <label><input type="radio" name="q12" value="d"> Una tecnología para autenticar la identidad.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>13. Las tecnologías inteligentes son aquellas capaces de simular:</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="a"> El comportamiento humano.</label>
+          <label><input type="radio" name="q13" value="b"> La evolución biológica.</label>
+          <label><input type="radio" name="q13" value="c"> La física cuántica.</label>
+          <label><input type="radio" name="q13" value="d"> La velocidad de procesamiento de datos.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>14. El blockchain es:</h3>
+        <div class="options">
+          <label><input type="radio" name="q14" value="a"> Un registro digital descentralizado y seguro de transacciones y datos.</label>
+          <label><input type="radio" name="q14" value="b"> Una criptomoneda.</label>
+          <label><input type="radio" name="q14" value="c"> Una base de datos cualquiera.</label>
+          <label><input type="radio" name="q14" value="d"> Un protocolo de seguridad para redes sociales.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>15. La mayor velocidad en la transmisión de datos del 5G permite:</h3>
+        <div class="options">
+          <label><input type="radio" name="q15" value="a"> Evitar el blanqueo de dinero.</label>
+          <label><input type="radio" name="q15" value="b"> Incrementar la capacidad de descarga y carga de archivos.</label>
+          <label><input type="radio" name="q15" value="c"> Mejorar la seguridad biométrica.</label>
+          <label><input type="radio" name="q15" value="d"> Mejorar la privacidad de los usuarios.</label>
+        </div>
+      </div>
+
+      <!-- Preguntas 16–25 (las extra que hicimos) -->
+
+      <div class="question" data-correct="b">
+        <h3>16. ¿Qué tecnología permite crear una réplica virtual de un producto para simular y optimizar su fabricación?</h3>
+        <div class="options">
+          <label><input type="radio" name="q16" value="a"> Big Data</label>
+          <label><input type="radio" name="q16" value="b"> Gemelo digital</label>
+          <label><input type="radio" name="q16" value="c"> Ciberseguridad</label>
+          <label><input type="radio" name="q16" value="d"> Realidad aumentada</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>17. ¿Cuál de los siguientes es un ejemplo claro de uso del IoT en una fábrica inteligente?</h3>
+        <div class="options">
+          <label><input type="radio" name="q17" value="a"> Robots quirúrgicos</label>
+          <label><input type="radio" name="q17" value="b"> Sensores en máquinas que registran su rendimiento</label>
+          <label><input type="radio" name="q17" value="c"> Drones de reparto</label>
+          <label><input type="radio" name="q17" value="d"> Servidores web en la nube</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>18. La principal ventaja de las viviendas domotizadas es:</h3>
+        <div class="options">
+          <label><input type="radio" name="q18" value="a"> Aumentar el precio del alquiler</label>
+          <label><input type="radio" name="q18" value="b"> Mayor comodidad, seguridad y eficiencia energética</label>
+          <label><input type="radio" name="q18" value="c"> Que no requieren conexión a Internet</label>
+          <label><input type="radio" name="q18" value="d"> Que eliminan el uso de electrodomésticos tradicionales</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>19. En una ciudad inteligente, los sensores en contenedores de basura se utilizan para:</h3>
+        <div class="options">
+          <label><input type="radio" name="q19" value="a"> Evitar robos</label>
+          <label><input type="radio" name="q19" value="b"> Bloquear el acceso a zonas restringidas</label>
+          <label><input type="radio" name="q19" value="c"> Avisar cuando están llenos y optimizar rutas</label>
+          <label><input type="radio" name="q19" value="d"> Medir la temperatura del entorno</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>20. ¿Qué tecnología es clave para la transmisión de datos en tiempo real necesaria en vehículos autónomos?</h3>
+        <div class="options">
+          <label><input type="radio" name="q20" value="a"> Inteligencia artificial</label>
+          <label><input type="radio" name="q20" value="b"> 5G</label>
+          <label><input type="radio" name="q20" value="c"> Blockchain</label>
+          <label><input type="radio" name="q20" value="d"> Impresión 3D</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>21. ¿Para qué se usa la realidad virtual en las fábricas inteligentes?</h3>
+        <div class="options">
+          <label><input type="radio" name="q21" value="a"> Para realizar pagos seguros</label>
+          <label><input type="radio" name="q21" value="b"> Para formar a los trabajadores con simulaciones</label>
+          <label><input type="radio" name="q21" value="c"> Para aumentar la privacidad de datos</label>
+          <label><input type="radio" name="q21" value="d"> Para optimizar el consumo energético</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>22. ¿Qué elemento caracteriza a una empresa inteligente?</h3>
+        <div class="options">
+          <label><input type="radio" name="q22" value="a"> Que solo usa robots</label>
+          <label><input type="radio" name="q22" value="b"> Sustituir todos los empleados por IA</label>
+          <label><input type="radio" name="q22" value="c"> Digitalizar procesos para ser más eficiente</label>
+          <label><input type="radio" name="q22" value="d"> Que no almacena datos en la nube</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>23. Una función del Big Data en la industria es:</h3>
+        <div class="options">
+          <label><input type="radio" name="q23" value="a"> Crear interfaces táctiles</label>
+          <label><input type="radio" name="q23" value="b"> Analizar datos para detectar patrones y prever fallos</label>
+          <label><input type="radio" name="q23" value="c"> Reemplazar sensores IoT</label>
+          <label><input type="radio" name="q23" value="d"> Funcionar como sistema biométrico</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>24. ¿Qué característica distingue a los drones autónomos en las fábricas inteligentes?</h3>
+        <div class="options">
+          <label><input type="radio" name="q24" value="a"> No necesitan energía eléctrica</label>
+          <label><input type="radio" name="q24" value="b"> Pueden transportar piezas urgentes de forma rápida</label>
+          <label><input type="radio" name="q24" value="c"> Se utilizan solo para vigilancia policial</label>
+          <label><input type="radio" name="q24" value="d"> Solo funcionan bajo control manual</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>25. ¿Qué ventaja aporta la computación en la nube a las empresas?</h3>
+        <div class="options">
+          <label><input type="radio" name="q25" value="a"> Elimina la necesidad de conexión a Internet</label>
+          <label><input type="radio" name="q25" value="b"> Permite acceso remoto a datos y aplicaciones</label>
+          <label><input type="radio" name="q25" value="c"> Funciona sin sistemas de almacenamiento</label>
+          <label><input type="radio" name="q25" value="d"> Aumenta el uso de papel en la oficina</label>
+        </div>
+      </div>
+
+      <div id="controls">
+        <button id="btn-correct" type="button">Corregir test</button>
+        <button id="btn-reset" type="button">Reiniciar respuestas</button>
+      </div>
+      <div id="result"></div>
+    </section>
+  </main>
+
+  <script>
+    function corregirTest() {
+      const questions = document.querySelectorAll('.question');
+      let correctas = 0;
+      let contestadas = 0;
+
+      questions.forEach(q => {
+        q.classList.remove('correct', 'incorrect');
+        const correcta = q.getAttribute('data-correct');
+        const seleccionada = q.querySelector('input[type="radio"]:checked');
+
+        if (seleccionada) {
+          contestadas++;
+          if (seleccionada.value === correcta) {
+            correctas++;
+            q.classList.add('correct');
+          } else {
+            q.classList.add('incorrect');
+          }
+        }
+      });
+
+      const total = questions.length;
+      const resultDiv = document.getElementById('result');
+
+      if (contestadas === 0) {
+        resultDiv.textContent = 'No has contestado ninguna pregunta todavía.';
+        return;
+      }
+
+      const nota10 = ((correctas / total) * 10).toFixed(2);
+      resultDiv.textContent = 'Has acertado ' + correctas + ' de ' + total +
+        ' preguntas. Nota aproximada: ' + nota10 + ' / 10.';
+    }
+
+    function reiniciarTest() {
+      const questions = document.querySelectorAll('.question');
+      questions.forEach(q => {
+        q.classList.remove('correct', 'incorrect');
+        const radios = q.querySelectorAll('input[type="radio"]');
+        radios.forEach(r => r.checked = false);
+      });
+      document.getElementById('result').textContent = '';
+    }
+
+    document.getElementById('btn-correct').addEventListener('click', corregirTest);
+    document.getElementById('btn-reset').addEventListener('click', reiniciarTest);
+  </script>
+</body>
+</html>

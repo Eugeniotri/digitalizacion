@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>UF4 - Sistemas basados en la nube</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0b1120;
+      color: #e5e7eb;
+    }
+
+    header {
+      background: linear-gradient(90deg, #1d4ed8, #22c55e);
+      color: #f9fafb;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #0b1120;
+      background: #e5e7eb;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 16px auto 24px;
+      padding: 0 16px;
+    }
+
+    section {
+      background: #020617;
+      border-radius: 14px;
+      padding: 14px 16px 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(148,163,184,.4);
+      box-shadow: 0 12px 30px rgba(15,23,42,.7);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #bfdbfe;
+    }
+
+    h3 {
+      margin-bottom: 4px;
+      color: #93c5fd;
+      font-size: 1rem;
+    }
+
+    ul {
+      margin-top: 4px;
+      padding-left: 20px;
+      font-size: 0.94rem;
+    }
+
+    p {
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.2);
+      color: #bfdbfe;
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+    }
+
+    /* TEST */
+    .question {
+      border: 1px solid rgba(148,163,184,.6);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      background: #020617;
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+
+    .question.correct {
+      border-color: #22c55e;
+      background-color: rgba(22,163,74,.15);
+    }
+
+    .question.incorrect {
+      border-color: #ef4444;
+      background-color: rgba(248,113,113,.15);
+    }
+
+    .question h3 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .options label {
+      display: block;
+      margin: 2px 0;
+      cursor: pointer;
+      font-size: 0.92rem;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 6px;
+    }
+
+    #controls {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    #btn-correct {
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 600;
+    }
+
+    #btn-reset {
+      background: #e5e7eb;
+      color: #020617;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    small {
+      color: #9ca3af;
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>UF4 · Sistemas basados en la nube</h1>
+      <p>Resumen del temario + cuestionario interactivo</p>
+    </div>
+    <a href="index.html">← Volver al índice</a>
+  </header>
+
+  <main>
+    <!-- TEMARIO -->
+    <section id="temario">
+      <span class="badge">Temario resumido</span>
+      <h2>Resumen de la UF4 · Sistemas basados en la nube</h2>
+
+      <h3>¿Qué es la nube / cloud computing?</h3>
+      <ul>
+        <li>Uso de recursos (almacenamiento, aplicaciones, capacidad de cómputo) a través de Internet.</li>
+        <li>Los datos y programas se ejecutan en servidores remotos, no solo en el ordenador local.</li>
+        <li>Permite pagar por uso, escalar recursos y acceder desde cualquier lugar.</li>
+      </ul>
+
+      <h3>Ventajas frente al modelo tradicional</h3>
+      <ul>
+        <li><strong>Escalabilidad:</strong> ajustar recursos según la demanda.</li>
+        <li><strong>Flexibilidad:</strong> acceso remoto desde distintos dispositivos.</li>
+        <li><strong>Ahorro de costes:</strong> no hace falta comprar servidores físicos propios.</li>
+        <li><strong>Desarrollo y despliegue de aplicaciones</strong> más rápido gracias a servicios cloud.</li>
+      </ul>
+
+      <h3>Problemas y retos del cloud</h3>
+      <ul>
+        <li><strong>Latencia:</strong> la distancia a los servidores puede provocar retardos.</li>
+        <li><strong>Ancho de banda:</strong> se requiere buena conexión a Internet.</li>
+        <li><strong>Sobrecarga de servidores</strong> si hay muchas peticiones.</li>
+        <li>Riesgos de seguridad y dependencia de la conexión a Internet.</li>
+      </ul>
+
+      <h3>Fog, Edge y Mist computing</h3>
+      <ul>
+        <li><strong>Edge computing:</strong> procesa los datos muy cerca de donde se generan (dispositivos cercanos).</li>
+        <li><strong>Fog computing:</strong> añade nodos de procesamiento intermedios entre el edge y la nube.</li>
+        <li><strong>Mist computing:</strong> procesa directamente en los propios dispositivos, reduciendo la latencia al mínimo.</li>
+        <li>Objetivo común: reducir latencia, aliviar la nube y mejorar el uso del ancho de banda.</li>
+      </ul>
+
+      <h3>Tipos de nube</h3>
+      <ul>
+        <li><strong>Nube pública:</strong> infraestructura de un proveedor externo (AWS, Azure…), accesible a empresas y usuarios.</li>
+        <li><strong>Nube privada:</strong> infraestructura cloud exclusiva de una organización; más control y seguridad.</li>
+        <li><strong>Nube híbrida:</strong> combinación de nube pública y privada, con transferencia de datos y aplicaciones entre ambas.</li>
+      </ul>
+
+      <h3>Modelos de servicio: IaaS, PaaS, SaaS</h3>
+      <ul>
+        <li><strong>IaaS (Infraestructura como Servicio):</strong> alquilas servidores virtuales, redes, almacenamiento. Tú instalas SO y aplicaciones.</li>
+        <li><strong>PaaS (Plataforma como Servicio):</strong> el proveedor da una plataforma lista (SO, runtime, BD) para desarrollar y desplegar aplicaciones.</li>
+        <li><strong>SaaS (Software como Servicio):</strong> el usuario solo usa la aplicación completa por Internet (Gmail, Drive…), sin instalar ni mantener servidores.</li>
+      </ul>
+
+      <h3>Contenedores y virtualización</h3>
+      <ul>
+        <li><strong>Virtualización:</strong> permite ejecutar múltiples sistemas operativos en una misma máquina física (máquinas virtuales).</li>
+        <li><strong>Contenedores:</strong> empaquetan aplicación + dependencias para que se ejecute igual en cualquier entorno.</li>
+        <li><strong>Orquestación (Kubernetes):</strong> gestiona despliegue, escalado y funcionamiento de muchos contenedores.</li>
+      </ul>
+
+      <h3>Seguridad y adopción de la nube</h3>
+      <ul>
+        <li>Es clave una buena <strong>conexión a Internet</strong> y políticas de seguridad.</li>
+        <li>La adopción de la nube puede requerir <strong>formación del personal</strong> y cambios en la infraestructura.</li>
+        <li>La pérdida de acceso a Internet puede impedir acceder temporalmente a los datos en la nube.</li>
+      </ul>
+    </section>
+
+    <!-- CUESTIONARIO -->
+    <section id="test">
+      <span class="badge">Cuestionario interactivo</span>
+      <h2>Test UF4 · 28 preguntas</h2>
+      <p><small>Marca una respuesta por pregunta y pulsa <strong>“Corregir test”</strong> al final.</small></p>
+
+      <!-- PREGUNTAS ORIGINALES 1-15 -->
+
+      <div class="question" data-correct="a">
+        <h3>1. ¿Qué tipo de nube combina recursos de nube pública y privada, permitiendo la transferencia de datos y aplicaciones entre ellas?</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a"> Nube híbrida</label>
+          <label><input type="radio" name="q1" value="b"> Nube pública</label>
+          <label><input type="radio" name="q1" value="c"> Nube privada</label>
+          <label><input type="radio" name="q1" value="d"> Nube comunitaria</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>2. ¿Qué tipo de servicio en la nube permite a los usuarios ejecutar aplicaciones sin preocuparse por la infraestructura subyacente?</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a"> Plataforma como Servicio (PaaS)</label>
+          <label><input type="radio" name="q2" value="b"> Ninguna respuesta es correcta</label>
+          <label><input type="radio" name="q2" value="c"> Software como Servicio (SaaS)</label>
+          <label><input type="radio" name="q2" value="d"> Infraestructura como Servicio (IaaS)</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>3. ¿Cuál de las siguientes opciones describe mejor la Plataforma como Servicio (PaaS)?</h3>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a"> Proporciona una plataforma para desarrollar, probar y desplegar aplicaciones.</label>
+          <label><input type="radio" name="q3" value="b"> Proporciona acceso a una infraestructura virtualizada, incluyendo servidores, almacenamiento y redes.</label>
+          <label><input type="radio" name="q3" value="c"> Ofrece acceso a aplicaciones de software a través de Internet, generalmente mediante una suscripción.</label>
+          <label><input type="radio" name="q3" value="d"> Permite a los usuarios desarrollar y ejecutar aplicaciones sin preocuparse por la infraestructura subyacente.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>4. La infraestructura como servicio (IaaS):</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> Permite alquilar un ordenador capaz de construir aplicaciones.</label>
+          <label><input type="radio" name="q4" value="b"> Ofrece todos los recursos de hardware y software necesarios para desarrollar aplicaciones.</label>
+          <label><input type="radio" name="q4" value="c"> Permite el acceso bajo demanda a servicios de infraestructura informática.</label>
+          <label><input type="radio" name="q4" value="d"> Proporciona aplicaciones completas, desde la infraestructura hasta el mantenimiento.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>5. La principal función del servidor central en el cloud computing es:</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> Desarrollar sistemas que mejoren la comunicación entre diferentes empresas.</label>
+          <label><input type="radio" name="q5" value="b"> Tomar decisiones estratégicas relacionadas con la ciberdelincuencia.</label>
+          <label><input type="radio" name="q5" value="c"> Gestionar toda la comunicación entre los dispositivos clientes.</label>
+          <label><input type="radio" name="q5" value="d"> Definir políticas internas de seguridad en una empresa.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>6. ¿Cuál de las siguientes opciones no es un beneficio típico de utilizar sistemas basados en la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="a"> Escalabilidad</label>
+          <label><input type="radio" name="q6" value="b"> Seguridad reducida</label>
+          <label><input type="radio" name="q6" value="c"> Flexibilidad</label>
+          <label><input type="radio" name="q6" value="d"> Desarrollo de aplicaciones</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>7. Los contenedores en la nube son:</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="a"> Tecnología de almacenamiento.</label>
+          <label><input type="radio" name="q7" value="b"> Tecnología de virtualización en la nube.</label>
+          <label><input type="radio" name="q7" value="c"> Tecnología de seguridad en la nube.</label>
+          <label><input type="radio" name="q7" value="d"> Tecnología de desarrollo de software.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>8. ¿Cuál es la principal función del fog computing en relación con el edge computing y la cloud?</h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="a"> Llevar el procesamiento más cerca de la fuente de datos.</label>
+          <label><input type="radio" name="q8" value="b"> Realizar todo el procesamiento de datos cerca de la fuente.</label>
+          <label><input type="radio" name="q8" value="c"> Proporcionar nodos de procesamiento intermedios.</label>
+          <label><input type="radio" name="q8" value="d"> Descentralizar parte del procesamiento.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>9. La implantación del cloud computing:</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="a"> Es un proceso sencillo y sin desafíos.</label>
+          <label><input type="radio" name="q9" value="b"> No es necesario realizar cambios en las infraestructuras de la empresa.</label>
+          <label><input type="radio" name="q9" value="c"> Puede requerir la formación y capacitación de los empleados de la empresa.</label>
+          <label><input type="radio" name="q9" value="d"> No implica riesgos de seguridad.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>10. Es una función principal del almacenamiento en la nube:</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="a"> Enviar mensajes de texto en dispositivos móviles.</label>
+          <label><input type="radio" name="q10" value="b"> Realizar cálculos complejos a través de servidores locales.</label>
+          <label><input type="radio" name="q10" value="c"> Guardar y acceder a archivos a través de Internet.</label>
+          <label><input type="radio" name="q10" value="d"> Realizar transacciones bancarias.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>11. La solución edge computing, en relación con la latencia:</h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="a"> La descentraliza.</label>
+          <label><input type="radio" name="q11" value="b"> La incrementa.</label>
+          <label><input type="radio" name="q11" value="c"> La reduce.</label>
+          <label><input type="radio" name="q11" value="d"> No tiene impacto.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>12. ¿Qué tecnología es fundamental para permitir el acceso remoto a recursos de la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="a"> Conexión a Internet.</label>
+          <label><input type="radio" name="q12" value="b"> Inteligencia artificial (IA).</label>
+          <label><input type="radio" name="q12" value="c"> Ciberseguridad.</label>
+          <label><input type="radio" name="q12" value="d"> Internet de las cosas (IoT).</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>13. ¿Qué son los sistemas basados en la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="a"> Plataformas que permiten acceder y gestionar datos a través de Internet.</label>
+          <label><input type="radio" name="q13" value="b"> Dispositivos electrónicos que funcionan sin conexión a Internet.</label>
+          <label><input type="radio" name="q13" value="c"> Software instalado exclusivamente en servidores locales.</label>
+          <label><input type="radio" name="q13" value="d"> Servidores que solo operan en redes privadas.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="d">
+        <h3>14. Las nubes privadas, en comparación con las nubes públicas:</h3>
+        <div class="options">
+          <label><input type="radio" name="q14" value="a"> Pertenecen a proveedores externos.</label>
+          <label><input type="radio" name="q14" value="b"> Ofrecen servicios bajo demanda.</label>
+          <label><input type="radio" name="q14" value="c"> Ofrecen las mismas características que las públicas, pero a un precio mayor.</label>
+          <label><input type="radio" name="q14" value="d"> Proporcionan más control y seguridad sobre los datos.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="d">
+        <h3>15. ¿Cuáles de los siguientes problemas no se abordan con las soluciones de edge, fog y mist computing?</h3>
+        <div class="options">
+          <label><input type="radio" name="q15" value="a"> Reducción de la latencia.</label>
+          <label><input type="radio" name="q15" value="b"> Sobrecarga de servidores.</label>
+          <label><input type="radio" name="q15" value="c"> Falta de ancho de banda.</label>
+          <label><input type="radio" name="q15" value="d"> Pérdida de datos.</label>
+        </div>
+      </div>
+
+      <!-- PREGUNTAS EXTRA 16-25 (las 10 nuevas) -->
+
+      <div class="question" data-correct="b">
+        <h3>16. ¿Cuál es una ventaja clave de utilizar contenedores en la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q16" value="a"> Consumen más recursos que las máquinas virtuales.</label>
+          <label><input type="radio" name="q16" value="b"> Garantizan que una aplicación funcione igual en diferentes entornos.</label>
+          <label><input type="radio" name="q16" value="c"> Reemplazan por completo la necesidad de servidores físicos.</label>
+          <label><input type="radio" name="q16" value="d"> Obligan a desarrollar aplicaciones solo para un sistema operativo específico.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>17. ¿Cuál de las siguientes afirmaciones describe mejor la nube pública?</h3>
+        <div class="options">
+          <label><input type="radio" name="q17" value="a"> Es una nube mantenida exclusivamente por una empresa para su uso interno.</label>
+          <label><input type="radio" name="q17" value="b"> Es una infraestructura accesible para el público general o empresas, gestionada por un proveedor externo.</label>
+          <label><input type="radio" name="q17" value="c"> Es una nube que combina recursos de diferentes organizaciones sin compartir infraestructura.</label>
+          <label><input type="radio" name="q17" value="d"> Es un sistema basado en la nube que solo funciona sin conexión a Internet.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>18. ¿Qué característica diferencia a SaaS de IaaS y PaaS?</h3>
+        <div class="options">
+          <label><input type="radio" name="q18" value="a"> Permite al usuario gestionar la infraestructura física.</label>
+          <label><input type="radio" name="q18" value="b"> Ofrece aplicaciones completas listas para usar a través de Internet.</label>
+          <label><input type="radio" name="q18" value="c"> Permite desarrollar aplicaciones personalizadas.</label>
+          <label><input type="radio" name="q18" value="d"> Es el modelo con mayor control técnico por parte del usuario.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>19. ¿Cuál es uno de los principales inconvenientes de depender únicamente del cloud computing tradicional (sin edge ni fog)?</h3>
+        <div class="options">
+          <label><input type="radio" name="q19" value="a"> Menor coste operativo.</label>
+          <label><input type="radio" name="q19" value="b"> Mayor latencia, especialmente cuando los servidores están lejos.</label>
+          <label><input type="radio" name="q19" value="c"> Mayor privacidad en los datos procesados.</label>
+          <label><input type="radio" name="q19" value="d"> No requiere conexión a Internet para funcionar.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>20. ¿Qué ventaja aporta el modelo IaaS frente a tener servidores físicos propios?</h3>
+        <div class="options">
+          <label><input type="radio" name="q20" value="a"> Reduce el control que la empresa tiene sobre la infraestructura.</label>
+          <label><input type="radio" name="q20" value="b"> Permite ajustar la capacidad de forma flexible según la demanda.</label>
+          <label><input type="radio" name="q20" value="c"> Obliga a almacenar todos los datos en local.</label>
+          <label><input type="radio" name="q20" value="d"> Solo permite ejecutar aplicaciones del proveedor.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>21. ¿Qué problema intenta resolver principalmente el mist computing?</h3>
+        <div class="options">
+          <label><input type="radio" name="q21" value="a"> Almacenar grandes cantidades de datos en un servidor central.</label>
+          <label><input type="radio" name="q21" value="b"> Procesar datos directamente en los dispositivos para reducir la latencia al mínimo.</label>
+          <label><input type="radio" name="q21" value="c"> Hacer copias de seguridad automáticas en la nube.</label>
+          <label><input type="radio" name="q21" value="d"> Proteger datos frente a accesos no autorizados.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>22. ¿Cuál de estas características es esencial para que una empresa adopte correctamente el cloud computing?</h3>
+        <div class="options">
+          <label><input type="radio" name="q22" value="a"> Desconectar todos los sistemas locales.</label>
+          <label><input type="radio" name="q22" value="b"> Tener una conexión a Internet estable y de alta capacidad.</label>
+          <label><input type="radio" name="q22" value="c"> Eliminar la necesidad de copias de seguridad.</label>
+          <label><input type="radio" name="q22" value="d"> Usar únicamente SaaS en lugar de IaaS o PaaS.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>23. ¿Qué ventaja ofrece la virtualización en la computación en la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q23" value="a"> Permite ejecutar múltiples sistemas operativos en una misma máquina física.</label>
+          <label><input type="radio" name="q23" value="b"> Elimina por completo la necesidad de redes locales.</label>
+          <label><input type="radio" name="q23" value="c"> Obliga a usar contenedores en lugar de máquinas virtuales.</label>
+          <label><input type="radio" name="q23" value="d"> Impide que varios usuarios compartan recursos.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>24. ¿Para qué se utilizan principalmente los contenedores orquestados (por ejemplo, mediante Kubernetes)?</h3>
+        <div class="options">
+          <label><input type="radio" name="q24" value="a"> Para gestionar automáticamente el despliegue, escalado y funcionamiento de múltiples contenedores.</label>
+          <label><input type="radio" name="q24" value="b"> Para almacenar grandes volúmenes de datos.</label>
+          <label><input type="radio" name="q24" value="c"> Para reemplazar completamente las máquinas virtuales.</label>
+          <label><input type="radio" name="q24" value="d"> Para aumentar el tamaño físico de los servidores.</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="a">
+        <h3>25. ¿Cuál de los siguientes es un riesgo real cuando una empresa migra sus datos a la nube?</h3>
+        <div class="options">
+          <label><input type="radio" name="q25" value="a"> Perder acceso a los datos si falla la conexión a Internet.</label>
+          <label><input type="radio" name="q25" value="b"> Que los datos se vuelvan incompatibles con cualquier tipo de software.</label>
+          <label><input type="radio" name="q25" value="c"> Que la nube no permita hacer copias de seguridad.</label>
+          <label><input type="radio" name="q25" value="d"> Que los empleados tengan prohibido acceder desde fuera de la oficina.</label>
+        </div>
+      </div>
+
+      <!-- PREGUNTAS EXTRA SaaS / PaaS / IaaS 26-28 -->
+
+      <div class="question" data-correct="c">
+        <h3>26. ¿Qué modelo de servicio en la nube te proporciona solo la infraestructura (servidores, redes y almacenamiento), dejando que tú instales el sistema operativo y las aplicaciones?</h3>
+        <div class="options">
+          <label><input type="radio" name="q26" value="a"> SaaS</label>
+          <label><input type="radio" name="q26" value="b"> PaaS</label>
+          <label><input type="radio" name="q26" value="c"> IaaS</label>
+          <label><input type="radio" name="q26" value="d"> Ninguno de los anteriores</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="c">
+        <h3>27. ¿Qué modelo de servicio te permite desarrollar y desplegar aplicaciones sin preocuparte de la infraestructura, pero sí gestionas tu código y tu aplicación?</h3>
+        <div class="options">
+          <label><input type="radio" name="q27" value="a"> IaaS</label>
+          <label><input type="radio" name="q27" value="b"> SaaS</label>
+          <label><input type="radio" name="q27" value="c"> PaaS</label>
+          <label><input type="radio" name="q27" value="d"> Fog computing</label>
+        </div>
+      </div>
+
+      <div class="question" data-correct="b">
+        <h3>28. ¿Cuál de los siguientes modelos te ofrece una aplicación lista para usar, sin necesidad de instalar nada ni gestionar servidores?</h3>
+        <div class="options">
+          <label><input type="radio" name="q28" value="a"> PaaS</label>
+          <label><input type="radio" name="q28" value="b"> SaaS</label>
+          <label><input type="radio" name="q28" value="c"> IaaS</label>
+          <label><input type="radio" name="q28" value="d"> Edge computing</label>
+        </div>
+      </div>
+
+      <div id="controls">
+        <button id="btn-correct" type="button">Corregir test</button>
+        <button id="btn-reset" type="button">Reiniciar respuestas</button>
+      </div>
+      <div id="result"></div>
+    </section>
+  </main>
+
+  <script>
+    function corregirTest() {
+      const questions = document.querySelectorAll('.question');
+      let correctas = 0;
+      let contestadas = 0;
+
+      questions.forEach(q => {
+        q.classList.remove('correct', 'incorrect');
+        const correcta = q.getAttribute('data-correct');
+        const seleccionada = q.querySelector('input[type="radio"]:checked');
+
+        if (seleccionada) {
+          contestadas++;
+          if (seleccionada.value === correcta) {
+            correctas++;
+            q.classList.add('correct');
+          } else {
+            q.classList.add('incorrect');
+          }
+        }
+      });
+
+      const total = questions.length;
+      const resultDiv = document.getElementById('result');
+
+      if (contestadas === 0) {
+        resultDiv.textContent = 'No has contestado ninguna pregunta todavía.';
+        return;
+      }
+
+      const nota10 = ((correctas / total) * 10).toFixed(2);
+      resultDiv.textContent =
+        'Has acertado ' + correctas + ' de ' + total +
+        ' preguntas. Nota aproximada: ' + nota10 + ' / 10.';
+    }
+
+    function reiniciarTest() {
+      const questions = document.querySelectorAll('.question');
+      questions.forEach(q => {
+        q.classList.remove('correct', 'incorrect');
+        const radios = q.querySelectorAll('input[type="radio"]');
+        radios.forEach(r => r.checked = false);
+      });
+      document.getElementById('result').textContent = '';
+    }
+
+    document.getElementById('btn-correct').addEventListener('click', corregirTest);
+    document.getElementById('btn-reset').addEventListener('click', reiniciarTest);
+  </script>
+</body>
+</html>
