@@ -320,6 +320,24 @@
       color: #4ade80;
     }
 
+    #corrections {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      background: rgba(15,23,42,.96);
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,.5);
+      padding: 10px 12px;
+    }
+
+    #corrections ul {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    #corrections li {
+      margin-bottom: 6px;
+    }
+
     @media (max-width: 640px) {
       header {
         flex-direction: column;
@@ -1177,6 +1195,7 @@
             <button type="reset" class="btn" id="reset-quiz">Reiniciar</button>
           </div>
           <div class="score" id="score"></div>
+          <div id="corrections"></div>
         </form>
       </section>
     </main>
@@ -1214,12 +1233,14 @@
     const submitBtn = document.getElementById('submit-quiz');
     const resetBtn = document.getElementById('reset-quiz');
     const scoreEl = document.getElementById('score');
+    const correctionsEl = document.getElementById('corrections');
 
     submitBtn.addEventListener('click', () => {
       let score = 0;
       const total = Object.keys(correctAnswers).length;
+      const incorrect = [];
 
-      Object.entries(correctAnswers).forEach(([q, correct]) => {
+      Object.entries(correctAnswers).forEach(([q, correct], index) => {
         const selected = document.querySelector(`input[name="${q}"]:checked`);
         const feedback = document.getElementById(`feedback-${q}`);
         const card = document.getElementById(`card-${q}`);
@@ -1229,10 +1250,31 @@
         feedback.classList.remove('correct', 'incorrect');
         card.style.borderColor = 'rgba(148,163,184,.35)';
 
+        const title = card.querySelector('.question-title').textContent.trim();
+        const radios = card.querySelectorAll('input[type="radio"]');
+        let userAnswerText = 'No respondida';
+        let correctAnswerText = '';
+
+        radios.forEach(r => {
+          const labelText = r.nextElementSibling.textContent.trim();
+          if (r.value === correct) {
+            correctAnswerText = labelText;
+          }
+          if (selected && r === selected) {
+            userAnswerText = labelText;
+          }
+        });
+
         if (!selected) {
           feedback.textContent = '⚠️ Pregunta sin responder.';
           feedback.classList.add('incorrect');
           card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
           return;
         }
 
@@ -1242,17 +1284,41 @@
           feedback.classList.add('correct');
           card.style.borderColor = '#4ade80';
         } else {
-          feedback.textContent = `❌ Incorrecta (correcta: ${correct.toUpperCase()})`;
+          feedback.textContent = `❌ Incorrecta`;
           feedback.classList.add('incorrect');
           card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
         }
       });
 
-      scoreEl.innerHTML = `Has acertado <span>${score}</span> de ${total} preguntas.`;
+      if (total === 0) return;
+
+      const grade = (score / total) * 10;
+      scoreEl.innerHTML = `Has acertado <span>${score}</span> de ${total} preguntas. Nota aproximada: <strong>${grade.toFixed(2)} / 10</strong>.`;
+
+      // listado de errores y correcciones
+      if (incorrect.length === 0) {
+        correctionsEl.innerHTML = "<p>🎉 No has cometido ningún error. ¡Test perfecto!</p>";
+      } else {
+        let html = "<p><strong>Errores y correcciones:</strong></p><ul>";
+        incorrect.forEach(item => {
+          html += "<li>";
+          html += "<strong>Pregunta " + item.number + ":</strong> " + item.text + "<br>";
+          html += "<span style='color:#f97373;'>Tu respuesta: " + item.userAnswer + "</span><br>";
+          html += "<span style='color:#4ade80;'>Respuesta correcta: " + item.correctAnswer + "</span>";
+          html += "</li>";
+        });
+        html += "</ul>";
+        correctionsEl.innerHTML = html;
+      }
     });
 
     resetBtn.addEventListener('click', () => {
-      // limpiar feedback y estilo
       Object.keys(correctAnswers).forEach((q) => {
         const feedback = document.getElementById(`feedback-${q}`);
         const card = document.getElementById(`card-${q}`);
@@ -1265,6 +1331,7 @@
         }
       });
       scoreEl.textContent = '';
+      correctionsEl.innerHTML = '';
     });
   </script>
 </body>

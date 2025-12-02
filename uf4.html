@@ -165,6 +165,24 @@
       color: #9ca3af;
       font-size: 0.82rem;
     }
+
+    #corrections {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,.5);
+      padding: 10px 12px;
+    }
+
+    #corrections ul {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    #corrections li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -539,6 +557,7 @@
         <button id="btn-reset" type="button">Reiniciar respuestas</button>
       </div>
       <div id="result"></div>
+      <div id="corrections"></div>
     </section>
   </main>
 
@@ -547,11 +566,27 @@
       const questions = document.querySelectorAll('.question');
       let correctas = 0;
       let contestadas = 0;
+      const incorrect = [];
 
-      questions.forEach(q => {
+      questions.forEach((q, idx) => {
         q.classList.remove('correct', 'incorrect');
         const correcta = q.getAttribute('data-correct');
         const seleccionada = q.querySelector('input[type="radio"]:checked');
+
+        const radios = q.querySelectorAll('input[type="radio"]');
+        let userAnswerText = "No respondida";
+        let correctAnswerText = "";
+
+        // recorrer opciones para obtener textos
+        radios.forEach(r => {
+          const labelText = r.parentElement.textContent.trim();
+          if (r.value === correcta) {
+            correctAnswerText = labelText;
+          }
+          if (seleccionada && r === seleccionada) {
+            userAnswerText = labelText;
+          }
+        });
 
         if (seleccionada) {
           contestadas++;
@@ -560,15 +595,31 @@
             q.classList.add('correct');
           } else {
             q.classList.add('incorrect');
+            incorrect.push({
+              number: idx + 1,
+              text: q.querySelector('h3').textContent,
+              userAnswer: userAnswerText,
+              correctAnswer: correctAnswerText
+            });
           }
+        } else {
+          // no contestada → también la listamos como incorrecta
+          incorrect.push({
+            number: idx + 1,
+            text: q.querySelector('h3').textContent,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
         }
       });
 
       const total = questions.length;
       const resultDiv = document.getElementById('result');
+      const correctionsDiv = document.getElementById('corrections');
 
       if (contestadas === 0) {
         resultDiv.textContent = 'No has contestado ninguna pregunta todavía.';
+        correctionsDiv.innerHTML = '';
         return;
       }
 
@@ -576,6 +627,22 @@
       resultDiv.textContent =
         'Has acertado ' + correctas + ' de ' + total +
         ' preguntas. Nota aproximada: ' + nota10 + ' / 10.';
+
+      // Errores y correcciones
+      if (incorrect.length === 0) {
+        correctionsDiv.innerHTML = "<p>🎉 No has cometido ningún error. ¡Test perfecto!</p>";
+      } else {
+        let html = "<p><strong>Errores y correcciones:</strong></p><ul>";
+        incorrect.forEach(item => {
+          html += "<li>";
+          html += "<strong>Pregunta " + item.number + ":</strong> " + item.text + "<br>";
+          html += "<span style='color:#f97373;'>Tu respuesta: " + item.userAnswer + "</span><br>";
+          html += "<span style='color:#4ade80;'>Respuesta correcta: " + item.correctAnswer + "</span>";
+          html += "</li>";
+        });
+        html += "</ul>";
+        correctionsDiv.innerHTML = html;
+      }
     }
 
     function reiniciarTest() {
@@ -586,6 +653,7 @@
         radios.forEach(r => r.checked = false);
       });
       document.getElementById('result').textContent = '';
+      document.getElementById('corrections').innerHTML = '';
     }
 
     document.getElementById('btn-correct').addEventListener('click', corregirTest);

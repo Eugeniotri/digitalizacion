@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UF2: Tecnologías Habilitadoras Digitales – Resumen y Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-color: #1e293b;
+            --text-color: #cbd5e1;
+            --header-color: #ffffff;
+            --accent-color: #00aaff;
+            --border-color: #334155;
+            --success-bg: #059669;
+            --fail-bg: #b91c1c;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: var(--card-color);
+            padding: 25px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+        }
+        h1, h2, h3 {
+            color: var(--header-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2em;
+            border-bottom: none;
+            margin-bottom: 10px;
+        }
+        h1 + h2 {
+            border-top: 2px solid var(--accent-color);
+            padding-top: 15px;
+        }
+        p, li {
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+        .concept {
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 18px;
+            padding: 15px;
+            background: #29364a;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 5px;
+        }
+        .question p {
+            margin: 0 0 10px 0;
+            font-weight: 400;
+        }
+        .button-container, .exit-button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .button:hover {
+            background-color: #0088cc;
+            transform: scale(1.05);
+        }
+        #results {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--header-color);
+        }
+        .results-pass {
+            background-color: var(--success-bg);
+        }
+        .results-fail {
+            background-color: var(--fail-bg);
+        }
+        #corrections {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            background: #111827;
+            padding: 15px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        #corrections ul {
+            padding-left: 18px;
+        }
+        #corrections li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>UF2 · Tecnologías Habilitadoras Digitales (THD)</h1>
+
+        <div class="concept">
+            <h2>Resumen de la Unidad Formativa 2: Tecnologías Habilitadoras Digitales</h2>
+
+            <h3>¿Qué son las Tecnologías Habilitadoras Digitales (THD)?</h3>
+            <p>
+                Las <strong>Tecnologías Habilitadoras Digitales (THD)</strong> son el <strong>conjunto de tecnologías que hacen posible la transformación digital</strong>.
+                Actúan como “motor” de la <strong>Industria 4.0</strong> y permiten que empresas y sectores se modernicen, automaticen procesos y 
+                tomen decisiones basadas en datos.
+            </p>
+            <p>Entre las THD más importantes encontramos:</p>
+            <ul>
+                <li><strong>Internet de las Cosas (IoT)</strong></li>
+                <li><strong>Inteligencia Artificial (IA) y Big Data</strong></li>
+                <li><strong>Computación en la nube (Cloud)</strong></li>
+                <li><strong>Blockchain</strong></li>
+                <li><strong>Ciberseguridad</strong></li>
+                <li><strong>Robótica avanzada y cobots</strong></li>
+                <li><strong>Realidad Virtual (RV) y Realidad Aumentada (RA)</strong></li>
+                <li><strong>Impresión 3D</strong></li>
+                <li><strong>5G y comunicaciones avanzadas</strong></li>
+            </ul>
+
+            <h3>TI y TO: Tecnologías de la Información y de la Operación</h3>
+            <p>Las THD suelen agruparse en dos grandes bloques:</p>
+            <ul>
+                <li>
+                    <strong>Tecnologías de la Información (TI):</strong> 
+                    se ocupan de <strong>gestionar datos e información</strong>.  
+                    Ejemplos: bases de datos, Big Data, IA, sistemas de gestión, cloud computing.
+                </li>
+                <li>
+                    <strong>Tecnologías de la Operación (TO):</strong> 
+                    se ocupan del <strong>mundo físico y los procesos industriales</strong>.  
+                    Ejemplos: sensores, robots, sistemas de control industrial, maquinaria conectada.
+                </li>
+            </ul>
+            <p>
+                En la Industria 4.0, <strong>TI y TO se integran</strong>: los datos que captan los sensores (TO) se envían a sistemas de análisis (TI),
+                que devuelven decisiones para actuar sobre la planta o el proceso.
+            </p>
+
+            <h3>Características comunes de las THD</h3>
+            <ul>
+                <li><strong>Interconexión:</strong> dispositivos, máquinas y sistemas conectados y compartiendo datos en red.</li>
+                <li><strong>Automatización:</strong> tareas que antes hacían personas ahora las realizan máquinas o software.</li>
+                <li><strong>Análisis de datos:</strong> uso de Big Data e IA para extraer información útil.</li>
+                <li><strong>Escalabilidad:</strong> capacidad de crecer (más usuarios, más datos, más procesos) sin perder rendimiento.</li>
+                <li><strong>Versatilidad:</strong> una misma tecnología se adapta a sectores distintos (sanidad, industria, comercio...).</li>
+                <li><strong>Seguridad:</strong> necesidad de proteger datos y sistemas (ciberseguridad).</li>
+                <li><strong>Sostenibilidad:</strong> objetivo de reducir consumos, emisiones y residuos usando tecnología.</li>
+            </ul>
+
+            <h3>Ejemplos rápidos de THD</h3>
+            <ul>
+                <li>
+                    <strong>IoT:</strong> sensores en una fábrica que miden temperatura, vibración o consumo y envían datos en tiempo real.
+                </li>
+                <li>
+                    <strong>Cloud Computing:</strong> almacenar datos y ejecutar aplicaciones en la nube, sin depender solo de servidores propios.
+                </li>
+                <li>
+                    <strong>5G:</strong> comunicaciones móviles de alta velocidad y baja latencia, clave para vehículos conectados y IoT masivo.
+                </li>
+                <li>
+                    <strong>Blockchain:</strong> registro <em>distribuido e inmutable</em> para operaciones seguras (pagos, trazabilidad, contratos).
+                </li>
+                <li>
+                    <strong>Realidad Virtual y Aumentada:</strong> formación en entornos simulados, mantenimiento guiado, diseño 3D, etc.
+                </li>
+            </ul>
+
+            <h3>Riesgos y retos de las THD</h3>
+            <ul>
+                <li><strong>Ciberseguridad:</strong> cuantos más sistemas conectados, más puntos vulnerables.</li>
+                <li><strong>Coste de implantación:</strong> inversión inicial en equipos, software y formación.</li>
+                <li><strong>Falta de perfiles cualificados:</strong> se necesitan técnicos con competencias digitales.</li>
+                <li><strong>Impacto ambiental:</strong> los centros de datos consumen mucha energía si no se gestionan bien.</li>
+            </ul>
+
+            <h3>Conclusión clave de la UF2</h3>
+            <p>
+                Las THD son la <strong>base técnica</strong> de la transformación digital.  
+                Entender qué son, cómo se clasifican (TI/TO) y sus características (interconexión, automatización, seguridad, sostenibilidad…) 
+                es imprescindible para comprender la Industria 4.0 y la digitalización de los sectores productivos.
+            </p>
+        </div>
+
+        <hr style="border-color: var(--border-color); margin: 40px 0;">
+
+        <h2>Test de Evaluación UF2 (20 Preguntas)</h2>
+        <p>Selecciona la respuesta correcta para cada pregunta. Al finalizar, pulsa el botón <strong>Evaluar</strong>.</p>
+        
+        <form id="quizForm">
+            <!-- 20 PREGUNTAS UF2 -->
+            <div class="question"><p>1. ¿Qué son las Tecnologías Habilitadoras Digitales (THD)?</p>
+                <input type="radio" name="q1" value="a"> a) Tecnologías que solo se utilizan en el ocio.<br>
+                <input type="radio" name="q1" value="b"> b) Tecnologías que impulsan la transformación digital y la Industria 4.0.<br>
+                <input type="radio" name="q1" value="c"> c) Equipos informáticos antiguos que se van sustituyendo.<br>
+            </div>
+
+            <div class="question"><p>2. Un sistema de Big Data para analizar grandes volúmenes de información pertenece principalmente a:</p>
+                <input type="radio" name="q2" value="a"> a) Tecnologías de la Información (TI).<br>
+                <input type="radio" name="q2" value="b"> b) Tecnologías de la Operación (TO).<br>
+                <input type="radio" name="q2" value="c"> c) Tecnologías analógicas.<br>
+            </div>
+
+            <div class="question"><p>3. Un sistema de sensores y actuadores que automatiza una cadena de montaje pertenece a:</p>
+                <input type="radio" name="q3" value="a"> a) Tecnologías de la Información (TI).<br>
+                <input type="radio" name="q3" value="b"> b) Tecnologías de la Operación (TO).<br>
+                <input type="radio" name="q3" value="c"> c) Tecnologías de entretenimiento.<br>
+            </div>
+
+            <div class="question"><p>4. La función principal de las Tecnologías de la Información (TI) es:</p>
+                <input type="radio" name="q4" value="a"> a) Monitorizar el mundo físico y controlar máquinas.<br>
+                <input type="radio" name="q4" value="b"> b) Almacenar, procesar, analizar y comunicar datos e información.<br>
+                <input type="radio" name="q4" value="c"> c) Fabricar piezas mecánicas.<br>
+            </div>
+
+            <div class="question"><p>5. La función principal de las Tecnologías de la Operación (TO) es:</p>
+                <input type="radio" name="q5" value="a"> a) Diseñar páginas web.<br>
+                <input type="radio" name="q5" value="b"> b) Gestionar nóminas y facturas.<br>
+                <input type="radio" name="q5" value="c"> c) Monitorizar y automatizar procesos físicos e industriales.<br>
+            </div>
+
+            <div class="question"><p>6. La característica de <strong>interconexión</strong> en las THD se refiere a:</p>
+                <input type="radio" name="q6" value="a"> a) Trabajar siempre sin conexión a Internet.<br>
+                <input type="radio" name="q6" value="b"> b) Conectar dispositivos, máquinas y sistemas para que compartan datos.<br>
+                <input type="radio" name="q6" value="c"> c) Apagar los sistemas cuando no se usan.<br>
+            </div>
+
+            <div class="question"><p>7. ¿Qué significa la <strong>automatización</strong> en el contexto de las THD?</p>
+                <input type="radio" name="q7" value="a"> a) Sustituir toda la tecnología por papel.<br>
+                <input type="radio" name="q7" value="b"> b) Repetir tareas manuales sin ayuda de máquinas.<br>
+                <input type="radio" name="q7" value="c"> c) Que procesos se realicen solos gracias a máquinas y software.<br>
+            </div>
+
+            <div class="question"><p>8. La <strong>escalabilidad</strong> de una tecnología digital significa:</p>
+                <input type="radio" name="q8" value="a"> a) Que no se pueda ampliar el número de usuarios.<br>
+                <input type="radio" name="q8" value="b"> b) Que la tecnología pueda crecer (más datos, más usuarios) manteniendo su rendimiento.<br>
+                <input type="radio" name="q8" value="c"> c) Que solo se pueda usar en empresas grandes.<br>
+            </div>
+
+            <div class="question"><p>9. La <strong>seguridad</strong> como característica de las THD está relacionada con:</p>
+                <input type="radio" name="q9" value="a"> a) Proteger los datos y sistemas frente a ataques y accesos no autorizados.<br>
+                <input type="radio" name="q9" value="b"> b) Apagar los servidores en horas punta.<br>
+                <input type="radio" name="q9" value="c"> c) No hacer copias de seguridad.<br>
+            </div>
+
+            <div class="question"><p>10. ¿Qué se busca con la <strong>sostenibilidad</strong> en el uso de THD?</p>
+                <input type="radio" name="q10" value="a"> a) Aumentar el consumo energético sin límites.<br>
+                <input type="radio" name="q10" value="b"> b) Reducir el impacto ambiental, consumo y residuos mediante tecnología.<br>
+                <input type="radio" name="q10" value="c"> c) Utilizar exclusivamente combustibles fósiles.<br>
+            </div>
+
+            <div class="question"><p>11. ¿Qué es el <strong>Internet de las Cosas (IoT)</strong>?</p>
+                <input type="radio" name="q11" value="a"> a) Una red de objetos físicos conectados que intercambian datos.<br>
+                <input type="radio" name="q11" value="b"> b) Una nueva red social para móviles.<br>
+                <input type="radio" name="q11" value="c"> c) Un tipo de robot industrial.<br>
+            </div>
+
+            <div class="question"><p>12. ¿Qué permite la <strong>computación en la nube (Cloud)</strong> a las empresas?</p>
+                <input type="radio" name="q12" value="a"> a) Guardar todos los datos en papel.<br>
+                <input type="radio" name="q12" value="b"> b) Almacenar datos y ejecutar aplicaciones en servidores remotos accesibles por Internet.<br>
+                <input type="radio" name="q12" value="c"> c) Eliminar el uso de redes.<br>
+            </div>
+
+            <div class="question"><p>13. Una ventaja clave del <strong>5G</strong> como THD es:</p>
+                <input type="radio" name="q13" value="a"> a) Velocidad baja y alta latencia.<br>
+                <input type="radio" name="q13" value="b"> b) Alta velocidad y baja latencia para comunicaciones en tiempo casi real.<br>
+                <input type="radio" name="q13" value="c"> c) Solo sirve para llamadas de voz.<br>
+            </div>
+
+            <div class="question"><p>14. ¿Qué describe mejor al <strong>Big Data</strong> como tecnología?</p>
+                <input type="radio" name="q14" value="a"> a) Pequeños conjuntos de datos fáciles de procesar.<br>
+                <input type="radio" name="q14" value="b"> b) Conjuntos de datos tan grandes y complejos que requieren herramientas avanzadas para ser analizados.<br>
+                <input type="radio" name="q14" value="c"> c) Un tipo de archivo de texto plano.<br>
+            </div>
+
+            <div class="question"><p>15. La <strong>Inteligencia Artificial (IA)</strong> dentro de las THD se utiliza principalmente para:</p>
+                <input type="radio" name="q15" value="a"> a) Realizar tareas sin ningún tipo de dato.<br>
+                <input type="radio" name="q15" value="b"> b) Aprender de los datos y apoyar la toma de decisiones automatizadas.<br>
+                <input type="radio" name="q15" value="c"> c) Sustituir todas las tecnologías anteriores.<br>
+            </div>
+
+            <div class="question"><p>16. ¿Qué es la <strong>tecnología blockchain</strong>?</p>
+                <input type="radio" name="q16" value="a"> a) Un tipo de impresora 3D.<br>
+                <input type="radio" name="q16" value="b"> b) Un registro distribuido e inmutable de transacciones.<br>
+                <input type="radio" name="q16" value="c"> c) Un sistema de correo electrónico.<br>
+            </div>
+
+            <div class="question"><p>17. La <strong>Realidad Virtual (RV)</strong> y la <strong>Realidad Aumentada (RA)</strong> se utilizan como THD para:</p>
+                <input type="radio" name="q17" value="a"> a) Crear entornos simulados y superponer información digital sobre el mundo real.<br>
+                <input type="radio" name="q17" value="b"> b) Imprimir documentos físicos.<br>
+                <input type="radio" name="q17" value="c"> c) Sustituir el correo electrónico.<br>
+            </div>
+
+            <div class="question"><p>18. Un ejemplo de uso de THD en logística es:</p>
+                <input type="radio" name="q18" value="a"> a) Enviar todos los paquetes sin ningún seguimiento.<br>
+                <input type="radio" name="q18" value="b"> b) Usar IoT y sistemas de trazabilidad para seguir los envíos en tiempo real.<br>
+                <input type="radio" name="q18" value="c"> c) Eliminar el uso de códigos de barras.<br>
+            </div>
+
+            <div class="question"><p>19. Un riesgo importante asociado a las THD es:</p>
+                <input type="radio" name="q19" value="a"> a) La existencia de ciberataques y brechas de seguridad.<br>
+                <input type="radio" name="q19" value="b"> b) La mejora en la eficiencia energética.<br>
+                <input type="radio" name="q19" value="c"> c) La automatización de copias de seguridad.<br>
+            </div>
+
+            <div class="question"><p>20. ¿Por qué es importante formarse en THD?</p>
+                <input type="radio" name="q20" value="a"> a) Porque las tecnologías no cambian nunca.<br>
+                <input type="radio" name="q20" value="b"> b) Porque son la base de la transformación digital y cambian los perfiles profesionales.<br>
+                <input type="radio" name="q20" value="c"> c) Porque solo se usan en entretenimiento.<br>
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="button" onclick="evaluateTest()">Evaluar</button>
+            </div>
+        </form>
+
+        <div id="results"></div>
+        <div id="corrections"></div>
+
+        <div class="exit-button-container">
+            <a href="../index.html" class="button">Volver al Menú Principal</a>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: "b", q2: "a", q3: "b", q4: "b", q5: "c",
+            q6: "b", q7: "c", q8: "b", q9: "a", q10: "b",
+            q11: "a", q12: "b", q13: "b", q14: "b", q15: "b",
+            q16: "b", q17: "a", q18: "b", q19: "a", q20: "b"
+        };
+
+        const quizInfo = {
+            q1: {
+                text: "¿Qué son las Tecnologías Habilitadoras Digitales (THD)?",
+                answers: {
+                    a: "Tecnologías que solo se utilizan en el ocio.",
+                    b: "Tecnologías que impulsan la transformación digital y la Industria 4.0.",
+                    c: "Equipos informáticos antiguos que se van sustituyendo."
+                }
+            },
+            q2: {
+                text: "Un sistema de Big Data para analizar grandes volúmenes de información pertenece principalmente a:",
+                answers: {
+                    a: "Tecnologías de la Información (TI).",
+                    b: "Tecnologías de la Operación (TO).",
+                    c: "Tecnologías analógicas."
+                }
+            },
+            q3: {
+                text: "Un sistema de sensores y actuadores que automatiza una cadena de montaje pertenece a:",
+                answers: {
+                    a: "Tecnologías de la Información (TI).",
+                    b: "Tecnologías de la Operación (TO).",
+                    c: "Tecnologías de entretenimiento."
+                }
+            },
+            q4: {
+                text: "La función principal de las Tecnologías de la Información (TI) es:",
+                answers: {
+                    a: "Monitorizar el mundo físico y controlar máquinas.",
+                    b: "Almacenar, procesar, analizar y comunicar datos e información.",
+                    c: "Fabricar piezas mecánicas."
+                }
+            },
+            q5: {
+                text: "La función principal de las Tecnologías de la Operación (TO) es:",
+                answers: {
+                    a: "Diseñar páginas web.",
+                    b: "Gestionar nóminas y facturas.",
+                    c: "Monitorizar y automatizar procesos físicos e industriales."
+                }
+            },
+            q6: {
+                text: "La característica de interconexión en las THD se refiere a:",
+                answers: {
+                    a: "Trabajar siempre sin conexión a Internet.",
+                    b: "Conectar dispositivos, máquinas y sistemas para que compartan datos.",
+                    c: "Apagar los sistemas cuando no se usan."
+                }
+            },
+            q7: {
+                text: "¿Qué significa la automatización en el contexto de las THD?",
+                answers: {
+                    a: "Sustituir toda la tecnología por papel.",
+                    b: "Repetir tareas manuales sin ayuda de máquinas.",
+                    c: "Que procesos se realicen solos gracias a máquinas y software."
+                }
+            },
+            q8: {
+                text: "La escalabilidad de una tecnología digital significa:",
+                answers: {
+                    a: "Que no se pueda ampliar el número de usuarios.",
+                    b: "Que la tecnología pueda crecer (más datos, más usuarios) manteniendo su rendimiento.",
+                    c: "Que solo se pueda usar en empresas grandes."
+                }
+            },
+            q9: {
+                text: "La seguridad como característica de las THD está relacionada con:",
+                answers: {
+                    a: "Proteger los datos y sistemas frente a ataques y accesos no autorizados.",
+                    b: "Apagar los servidores en horas punta.",
+                    c: "No hacer copias de seguridad."
+                }
+            },
+            q10: {
+                text: "¿Qué se busca con la sostenibilidad en el uso de THD?",
+                answers: {
+                    a: "Aumentar el consumo energético sin límites.",
+                    b: "Reducir el impacto ambiental, consumo y residuos mediante tecnología.",
+                    c: "Utilizar exclusivamente combustibles fósiles."
+                }
+            },
+            q11: {
+                text: "¿Qué es el Internet de las Cosas (IoT)?",
+                answers: {
+                    a: "Una red de objetos físicos conectados que intercambian datos.",
+                    b: "Una nueva red social para móviles.",
+                    c: "Un tipo de robot industrial."
+                }
+            },
+            q12: {
+                text: "¿Qué permite la computación en la nube (Cloud) a las empresas?",
+                answers: {
+                    a: "Guardar todos los datos en papel.",
+                    b: "Almacenar datos y ejecutar aplicaciones en servidores remotos accesibles por Internet.",
+                    c: "Eliminar el uso de redes."
+                }
+            },
+            q13: {
+                text: "Una ventaja clave del 5G como THD es:",
+                answers: {
+                    a: "Velocidad baja y alta latencia.",
+                    b: "Alta velocidad y baja latencia para comunicaciones en tiempo casi real.",
+                    c: "Solo sirve para llamadas de voz."
+                }
+            },
+            q14: {
+                text: "¿Qué describe mejor al Big Data como tecnología?",
+                answers: {
+                    a: "Pequeños conjuntos de datos fáciles de procesar.",
+                    b: "Conjuntos de datos tan grandes y complejos que requieren herramientas avanzadas para ser analizados.",
+                    c: "Un tipo de archivo de texto plano."
+                }
+            },
+            q15: {
+                text: "La Inteligencia Artificial (IA) dentro de las THD se utiliza principalmente para:",
+                answers: {
+                    a: "Realizar tareas sin ningún tipo de dato.",
+                    b: "Aprender de los datos y apoyar la toma de decisiones automatizadas.",
+                    c: "Sustituir todas las tecnologías anteriores."
+                }
+            },
+            q16: {
+                text: "¿Qué es la tecnología blockchain?",
+                answers: {
+                    a: "Un tipo de impresora 3D.",
+                    b: "Un registro distribuido e inmutable de transacciones.",
+                    c: "Un sistema de correo electrónico."
+                }
+            },
+            q17: {
+                text: "La Realidad Virtual (RV) y la Realidad Aumentada (RA) se utilizan como THD para:",
+                answers: {
+                    a: "Crear entornos simulados y superponer información digital sobre el mundo real.",
+                    b: "Imprimir documentos físicos.",
+                    c: "Sustituir el correo electrónico."
+                }
+            },
+            q18: {
+                text: "Un ejemplo de uso de THD en logística es:",
+                answers: {
+                    a: "Enviar todos los paquetes sin ningún seguimiento.",
+                    b: "Usar IoT y sistemas de trazabilidad para seguir los envíos en tiempo real.",
+                    c: "Eliminar el uso de códigos de barras."
+                }
+            },
+            q19: {
+                text: "Un riesgo importante asociado a las THD es:",
+                answers: {
+                    a: "La existencia de ciberataques y brechas de seguridad.",
+                    b: "La mejora en la eficiencia energética.",
+                    c: "La automatización de copias de seguridad."
+                }
+            },
+            q20: {
+                text: "¿Por qué es importante formarse en THD?",
+                answers: {
+                    a: "Porque las tecnologías no cambian nunca.",
+                    b: "Porque son la base de la transformación digital y cambian los perfiles profesionales.",
+                    c: "Porque solo se usan en entretenimiento."
+                }
+            }
+        };
+
+        function evaluateTest() {
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            const totalQuestions = 20;
+            const incorrect = [];
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selected = form.querySelector('input[name="' + questionName + '"]:checked');
+                const userAnswer = selected ? selected.value : null;
+                const correct = correctAnswers[questionName];
+
+                if (userAnswer === correct) {
+                    score++;
+                } else {
+                    const info = quizInfo[questionName];
+                    incorrect.push({
+                        number: i,
+                        text: info.text,
+                        userAnswer: userAnswer ? info.answers[userAnswer] : "No respondida",
+                        correctAnswer: info.answers[correct]
+                    });
+                }
+            }
+            
+            const grade = (score / totalQuestions) * 10;
+            const resultsDiv = document.getElementById('results');
+            const correctionsDiv = document.getElementById('corrections');
+            
+            let message = `Has acertado <strong>${score}</strong> de <strong>${totalQuestions}</strong> preguntas.<br>Tu nota es: <strong>${grade.toFixed(2)} / 10</strong>.`;
+            resultsDiv.innerHTML = message;
+
+            if (grade >= 5) {
+                resultsDiv.className = 'results-pass';
+                resultsDiv.innerHTML += "<br>¡Enhorabuena, has aprobado!";
+            } else {
+                resultsDiv.className = 'results-fail';
+                resultsDiv.innerHTML += "<br>Necesitas repasar un poco más. ¡Ánimo!";
+            }
+
+            if (incorrect.length === 0) {
+                correctionsDiv.innerHTML = "<p>🎉 No has cometido ningún error. ¡Test perfecto!</p>";
+            } else {
+                let html = "<p><strong>Errores y correcciones:</strong></p><ul>";
+                incorrect.forEach(item => {
+                    html += "<li>";
+                    html += "<strong>Pregunta " + item.number + ":</strong> " + item.text + "<br>";
+                    html += "<span style='color:#f97373;'>Tu respuesta: " + item.userAnswer + "</span><br>";
+                    html += "<span style='color:#4ade80;'>Respuesta correcta: " + item.correctAnswer + "</span>";
+                    html += "</li>";
+                });
+                html += "</ul>";
+                correctionsDiv.innerHTML = html;
+            }
+        }
+    </script>
+
+</body>
+</html>

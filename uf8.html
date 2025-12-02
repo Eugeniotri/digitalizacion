@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Digitalización · UF8 Aplicaciones de la IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root { 
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --radius: 18px;
+      --shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 1100px;
+      background: radial-gradient(900px 560px at 100% 120%, rgba(56,189,248,.15), transparent 66%),
+                  radial-gradient(900px 560px at -10% -20%, rgba(52,211,153,.15), transparent 66%),
+                  rgba(10,14,27,.9);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,.35);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(148,163,184,.3);
+      background: linear-gradient(90deg, rgba(15,23,42,.9), rgba(15,23,42,.4));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: conic-gradient(from 0deg, #22c55e, #22d3ee, #6366f1, #22c55e);
+      padding: 2px;
+    }
+
+    .logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: #bbf7d0;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .title-block p {
+      margin: 2px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    main {
+      padding: 20px 24px 24px;
+    }
+
+    .intro {
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(15,23,42,.96);
+      border-radius: 16px;
+      border: 1px solid rgba(148,163,184,.35);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 35px rgba(15,23,42,.9);
+      border-color: rgba(94,234,212,.8);
+      background: radial-gradient(circle at top, rgba(45,212,191,.06), rgba(15,23,42,.98));
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(34,197,94,.12);
+      color: #bbf7d0;
+      font-size: 0.75rem;
+      margin-bottom: 6px;
+    }
+
+    .badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,.25);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin: 4px 0 10px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      min-width: 0;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.82rem;
+      text-decoration: none;
+      border: 1px solid rgba(148,163,184,.6);
+      color: var(--text-main);
+      background: rgba(15,23,42,0.9);
+      cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, transform .12s ease;
+    }
+
+    .btn.primary {
+      border-color: rgba(34,197,94,.9);
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      color: #052e16;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(248,250,252,.9);
+    }
+
+    .btn.primary:hover {
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+    .sections-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card h3 {
+      margin: 8px 0 4px;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 2px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.5);
+      color: var(--text-muted);
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 4px 0 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    li + li {
+      margin-top: 2px;
+    }
+
+    .highlight {
+      background: rgba(34,197,94,.08);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 0.84rem;
+      border: 1px dashed rgba(74,222,128,.4);
+      margin-top: 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* === ESTILOS QUIZ === */
+    .quiz-section {
+      margin-top: 24px;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .quiz-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .quiz-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .question-card {
+      background: rgba(15,23,42,.96);
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,.35);
+      padding: 10px 12px 12px;
+      font-size: 0.86rem;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .question-card:hover {
+      border-color: rgba(94,234,212,.7);
+      box-shadow: 0 12px 25px rgba(15,23,42,.8);
+      background: radial-gradient(circle at top, rgba(45,212,191,.04), rgba(15,23,42,.98));
+    }
+
+    .question-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.88rem;
+      color: #e5e7eb;
+    }
+
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 3px;
+    }
+
+    .options li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .options input[type="radio"] {
+      margin-top: 2px;
+      accent-color: #22c55e;
+    }
+
+    .feedback {
+      margin-top: 3px;
+      font-size: 0.8rem;
+      min-height: 16px;
+    }
+
+    .feedback.correct {
+      color: #4ade80;
+    }
+
+    .feedback.incorrect {
+      color: #f97373;
+    }
+
+    .quiz-actions {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .score {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .score span {
+      color: #4ade80;
+    }
+
+    #corrections {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      background: rgba(15,23,42,.96);
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,.5);
+      padding: 10px 12px;
+    }
+
+    #corrections ul {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    #corrections li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">
+          <div class="logo-inner">D</div>
+        </div>
+        <div class="title-block">
+          <h1>UF8 · Aplicaciones de la Inteligencia Artificial</h1>
+          <p>IA aplicada a los sectores productivos: usos, ventajas, riesgos y sectores clave</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="actions" style="margin-bottom: 12px;">
+        <a href="index.html" class="btn">← Volver al índice de unidades</a>
+      </div>
+
+      <p class="intro">
+        En esta unidad verás cómo se aplica la <strong>inteligencia artificial</strong> en distintos <strong>sectores productivos</strong> 
+        (sanidad, industria, agricultura, finanzas, transporte, energía, comercio, educación…) y qué beneficios y riesgos tiene.
+      </p>
+
+      <div class="grid sections-grid">
+        <!-- Sección 1 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>1. Qué es la IA aplicada</div>
+            <h2>IA aplicada a sectores productivos</h2>
+            <p>
+              La IA aplicada consiste en usar la inteligencia artificial para <strong>mejorar procesos</strong>, 
+              <strong>automatizar tareas</strong>, reducir <strong>errores</strong> y aumentar la <strong>productividad</strong> en empresas.
+            </p>
+
+            <h3>Tecnologías clave relacionadas</h3>
+            <ul>
+              <li><strong>Big Data:</strong> grandes volúmenes de datos para entrenar modelos.</li>
+              <li><strong>Machine Learning:</strong> algoritmos que aprenden patrones.</li>
+              <li><strong>Deep Learning:</strong> redes neuronales profundas para tareas complejas.</li>
+              <li><strong>IoT (Internet de las cosas):</strong> sensores conectados que envían datos en tiempo real.</li>
+              <li><strong>Robótica:</strong> robots físicos controlados o mejorados por IA.</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Idea para examen:</strong> la IA aplicada siempre está unida a <em>datos + algoritmos + contexto real de empresa</em>.
+            </div>
+          </div>
+        </article>
+
+        <!-- Sección 2 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>2. IA en sanidad, industria y finanzas</div>
+            <h2>Sanidad, Industria 4.0 y Banca</h2>
+            <p>
+              Son tres de los sectores donde más se está utilizando la IA en el mundo real.
+            </p>
+
+            <h3>Sanidad</h3>
+            <ul>
+              <li>Diagnóstico asistido por IA (análisis de <strong>imágenes médicas</strong>).</li>
+              <li><strong>Medicina personalizada</strong> según datos del paciente.</li>
+              <li><strong>Wearables</strong> que monitorizan constantes (pulso, sueño, oxígeno…).</li>
+              <li>Predicción de epidemias y gestión de recursos sanitarios.</li>
+            </ul>
+
+            <h3>Industria (Industria 4.0)</h3>
+            <ul>
+              <li><strong>Mantenimiento predictivo</strong> gracias a sensores IoT.</li>
+              <li>Control de calidad automatizado con <strong>visión artificial</strong>.</li>
+              <li><strong>Robots colaborativos</strong> que trabajan junto a personas.</li>
+              <li>Optimización del consumo energético y tiempos de producción.</li>
+            </ul>
+
+            <h3>Sector financiero</h3>
+            <ul>
+              <li>Detección de <strong>fraudes</strong> en tiempo real.</li>
+              <li>Cálculo de <strong>riesgo</strong> en créditos y préstamos.</li>
+              <li><strong>Asistentes virtuales</strong> que atienden clientes 24/7.</li>
+              <li>Inversión automatizada (<em>robo-advisors</em>).</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Clave:</strong> sanidad = diagnósticos; industria = sensores + robots; banca = fraude + riesgo.
+            </div>
+          </div>
+        </article>
+
+        <!-- Sección 3 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>3. IA en transporte, comercio y agricultura</div>
+            <h2>Transporte, comercio y Smart Farming</h2>
+            <p>
+              La IA también transforma cómo nos movemos, compramos y producimos alimentos.
+            </p>
+
+            <h3>Transporte y logística</h3>
+            <ul>
+              <li><strong>Vehículos autónomos</strong> (visión artificial y deep learning).</li>
+              <li><strong>Optimización de rutas</strong> para reducir tiempo y combustible.</li>
+              <li>Predicción de <strong>tráfico</strong> y gestión de flotas.</li>
+              <li>Almacenes automatizados con robots.</li>
+            </ul>
+
+            <h3>Comercio y marketing</h3>
+            <ul>
+              <li><strong>Sistemas de recomendación</strong> (productos, series, música).</li>
+              <li>Segmentación de clientes y campañas personalizadas.</li>
+              <li>Chatbots de atención al cliente.</li>
+              <li>Análisis de opiniones y <strong>sentimiento</strong> en redes sociales.</li>
+            </ul>
+
+            <h3>Agricultura (Smart Farming)</h3>
+            <ul>
+              <li>Sensores de <strong>humedad, clima y nutrientes</strong> en el suelo.</li>
+              <li><strong>Drones</strong> que inspeccionan cultivos y detectan plagas.</li>
+              <li><strong>Riego inteligente</strong> según datos reales.</li>
+              <li>Mejora de la <strong>productividad</strong> y ahorro de agua.</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Idea clave:</strong> transporte = rutas óptimas; comercio = personalización; agricultura = sensores + drones.
+            </div>
+          </div>
+        </article>
+
+        <!-- Sección 4 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>4. IA en energía, ciudades y educación</div>
+            <h2>Energía, Smart Cities y educación</h2>
+            <p>
+              La IA también está presente en la gestión de recursos, ciudades y aprendizaje.
+            </p>
+
+            <h3>Energía</h3>
+            <ul>
+              <li><strong>Smart grids</strong>: redes eléctricas inteligentes.</li>
+              <li>Predicción de la <strong>demanda eléctrica</strong>.</li>
+              <li>Optimización del uso de <strong>energías renovables</strong>.</li>
+              <li>Mantenimiento predictivo de instalaciones.</li>
+            </ul>
+
+            <h3>Ciudades inteligentes (Smart Cities)</h3>
+            <ul>
+              <li>Gestión del <strong>tráfico</strong> mediante sensores y cámaras.</li>
+              <li>Control inteligente de <strong>iluminación y residuos</strong>.</li>
+              <li>Uso de datos para mejorar el transporte público.</li>
+            </ul>
+
+            <h3>Educación</h3>
+            <ul>
+              <li>Plataformas de <strong>aprendizaje personalizado</strong>.</li>
+              <li>Corrección automática de ejercicios.</li>
+              <li>Simuladores y entornos virtuales de aprendizaje.</li>
+              <li>Detección de <strong>riesgo de abandono escolar</strong>.</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Para el examen:</strong> Smart City = IA + IoT para gestionar tráfico, luz, residuos y servicios públicos.
+            </div>
+          </div>
+        </article>
+
+        <!-- Sección 5 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>5. Ventajas de la IA en sectores productivos</div>
+            <h2>Beneficios principales</h2>
+            <p>
+              La IA aporta ventajas comunes a casi todos los sectores.
+            </p>
+
+            <ul>
+              <li>Aumento de la <strong>productividad</strong>.</li>
+              <li>Reducción de <strong>errores humanos</strong>.</li>
+              <li><strong>Ahorro de costes</strong> a medio y largo plazo.</li>
+              <li>Mejor <strong>toma de decisiones</strong> gracias a los datos.</li>
+              <li>Servicios más <strong>personalizados</strong> al cliente.</li>
+              <li>Detección de <strong>patrones ocultos</strong> en grandes volúmenes de datos.</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Resumen:</strong> la IA aporta valor sobre todo al <em>predecir</em> y <em>optimizar</em> lo que va a ocurrir.
+            </div>
+          </div>
+        </article>
+
+        <!-- Sección 6 -->
+        <article class="card">
+          <div>
+            <div class="badge"><span></span>6. Riesgos, retos y nuevas formas de IA</div>
+            <h2>Riesgos, IA generativa y biometría</h2>
+            <p>
+              No todo son ventajas: también hay riesgos y debates éticos.
+            </p>
+
+            <h3>Riesgos y desafíos</h3>
+            <ul>
+              <li><strong>Sesgos</strong> en los datos → decisiones injustas.</li>
+              <li>Problemas de <strong>privacidad</strong> y vigilancia.</li>
+              <li>Desplazamiento de trabajos repetitivos.</li>
+              <li>Necesidad de <strong>profesionales especializados</strong>.</li>
+            </ul>
+
+            <h3>IA generativa</h3>
+            <ul>
+              <li>Capaz de generar <strong>contenido nuevo</strong> (texto, imágenes, música…).</li>
+              <li>Ventajas: creatividad, apoyo al diseño, generación de ideas.</li>
+              <li>Crítica importante: creación de <strong>contenido falso o engañoso</strong> (deepfakes).</li>
+            </ul>
+
+            <h3>Biometría comportamental</h3>
+            <ul>
+              <li>Analiza <strong>cómo</strong> actuamos (forma de caminar, escribir, teclear…).</li>
+              <li>Permite identificar personas por su comportamiento.</li>
+            </ul>
+
+            <div class="highlight">
+              <strong>Pregunta típica:</strong> IA generativa = crea contenido nuevo; biometría comportamental = analiza <em>forma de hacer</em> (caminar, firmar…).
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- === QUIZ UF8 · 25 PREGUNTAS CON ERRORES Y CORRECCIONES === -->
+      <section class="quiz-section">
+        <article class="card">
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-title">Quiz UF8 · 25 preguntas clave</div>
+              <div class="quiz-subtitle">Responde y pulsa <strong>“Corregir test”</strong> para ver tu nota y los errores.</div>
+            </div>
+          </div>
+
+          <form id="quiz-form">
+            <div class="question-grid">
+              <!-- 1 -->
+              <div class="question-card" id="card-q1">
+                <div class="question-title">1. ¿Qué beneficios se espera de la unión entre la IA y la tecnología blockchain?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q1" value="a" id="q1a"><label for="q1a">Incremento en fraudes y riesgos de seguridad.</label></li>
+                  <li><input type="radio" name="q1" value="b" id="q1b"><label for="q1b">Automatización total en el proceso de toma de decisiones.</label></li>
+                  <li><input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Reducción de la participación ciudadana.</label></li>
+                  <li><input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Mejora en la transparencia y seguridad en la gestión de descuentos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q1"></div>
+              </div>
+
+              <!-- 2 -->
+              <div class="question-card" id="card-q2">
+                <div class="question-title">2. La inteligencia artificial generativa es un...</div>
+                <ul class="options">
+                  <li><input type="radio" name="q2" value="a" id="q2a"><label for="q2a">Sistema diseñado exclusivamente para el análisis de big data.</label></li>
+                  <li><input type="radio" name="q2" value="b" id="q2b"><label for="q2b">Sistema con capacidad de generar contenido nuevo y original.</label></li>
+                  <li><input type="radio" name="q2" value="c" id="q2c"><label for="q2c">Sistema que solo reconoce imágenes y voz.</label></li>
+                  <li><input type="radio" name="q2" value="d" id="q2d"><label for="q2d">Sistema dedicado solo a la creación de asistentes virtuales.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q2"></div>
+              </div>
+
+              <!-- 3 -->
+              <div class="question-card" id="card-q3">
+                <div class="question-title">3. La tecnología que analiza la forma de caminar o el estilo de escritura se denomina:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q3" value="a" id="q3a"><label for="q3a">Biometría comportamental.</label></li>
+                  <li><input type="radio" name="q3" value="b" id="q3b"><label for="q3b">Biometría médica.</label></li>
+                  <li><input type="radio" name="q3" value="c" id="q3c"><label for="q3c">Biometría.</label></li>
+                  <li><input type="radio" name="q3" value="d" id="q3d"><label for="q3d">Biometría multimodal.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q3"></div>
+              </div>
+
+              <!-- 4 -->
+              <div class="question-card" id="card-q4">
+                <div class="question-title">4. ¿Cómo emplean las redes sociales la inteligencia artificial para sugerir contenido a sus usuarios?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q4" value="a" id="q4a"><label for="q4a">Analizando datos de navegación.</label></li>
+                  <li><input type="radio" name="q4" value="b" id="q4b"><label for="q4b">A través del reconocimiento facial y la biometría.</label></li>
+                  <li><input type="radio" name="q4" value="c" id="q4c"><label for="q4c">Evaluando el uso de tiempo de las redes sociales.</label></li>
+                  <li><input type="radio" name="q4" value="d" id="q4d"><label for="q4d">Rastreando información contenida en los correos electrónicos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q4"></div>
+              </div>
+
+              <!-- 5 -->
+              <div class="question-card" id="card-q5">
+                <div class="question-title">5. Es una ventaja potencial de la IA en la impresión 3D:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q5" value="a" id="q5a"><label for="q5a">Permite crear productos personalizados a bajo coste.</label></li>
+                  <li><input type="radio" name="q5" value="b" id="q5b"><label for="q5b">Reduce la producción automatizada.</label></li>
+                  <li><input type="radio" name="q5" value="c" id="q5c"><label for="q5c">Su uso es gratuito.</label></li>
+                  <li><input type="radio" name="q5" value="d" id="q5d"><label for="q5d">Aumento de riesgo de error.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q5"></div>
+              </div>
+
+              <!-- 6 -->
+              <div class="question-card" id="card-q6">
+                <div class="question-title">6. Es una posible aplicación de los robots con la IA social y emocional:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q6" value="a" id="q6a"><label for="q6a">Exploración espacial y oceánica.</label></li>
+                  <li><input type="radio" name="q6" value="b" id="q6b"><label for="q6b">Cosecha de cultivos en la agricultura.</label></li>
+                  <li><input type="radio" name="q6" value="c" id="q6c"><label for="q6c">Creación de obras de arte.</label></li>
+                  <li><input type="radio" name="q6" value="d" id="q6d"><label for="q6d">Cuidado de personas mayores o en la educación.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q6"></div>
+              </div>
+
+              <!-- 7 -->
+              <div class="question-card" id="card-q7">
+                <div class="question-title">7. La IA puede contribuir a la mejora de la motivación de los empleados:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q7" value="a" id="q7a"><label for="q7a">Reduciendo los tiempos de evaluación en los procesos de selección de personal.</label></li>
+                  <li><input type="radio" name="q7" value="b" id="q7b"><label for="q7b">Ignorando conflictos internos.</label></li>
+                  <li><input type="radio" name="q7" value="c" id="q7c"><label for="q7c">Analizando encuestas de satisfacción y proponiendo mejoras.</label></li>
+                  <li><input type="radio" name="q7" value="d" id="q7d"><label for="q7d">Cuantificando el número de conflictos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q7"></div>
+              </div>
+
+              <!-- 8 -->
+              <div class="question-card" id="card-q8">
+                <div class="question-title">8. Es un uso de la IA en la nube:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q8" value="a" id="q8a"><label for="q8a">Facilitar la búsqueda y organización de información.</label></li>
+                  <li><input type="radio" name="q8" value="b" id="q8b"><label for="q8b">Producir contenido nuevo y original.</label></li>
+                  <li><input type="radio" name="q8" value="c" id="q8c"><label for="q8c">Controlar dispositivos electrónicos en el hogar.</label></li>
+                  <li><input type="radio" name="q8" value="d" id="q8d"><label for="q8d">Simular entornos profesionales para estudiantes.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q8"></div>
+              </div>
+
+              <!-- 9 -->
+              <div class="question-card" id="card-q9">
+                <div class="question-title">9. Término empleado para describir la rápida circulación de información por Internet:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q9" value="a" id="q9a"><label for="q9a">Inteligencia emocional.</label></li>
+                  <li><input type="radio" name="q9" value="b" id="q9b"><label for="q9b">Viralidad.</label></li>
+                  <li><input type="radio" name="q9" value="c" id="q9c"><label for="q9c">Inteligencia artificial generativa.</label></li>
+                  <li><input type="radio" name="q9" value="d" id="q9d"><label for="q9d">Deep learning.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q9"></div>
+              </div>
+
+              <!-- 10 -->
+              <div class="question-card" id="card-q10">
+                <div class="question-title">10. Una de las principales críticas a la IA artística es:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q10" value="a" id="q10a"><label for="q10a">Permite crear nuevas expresiones artísticas con la combinación de otras tecnologías.</label></li>
+                  <li><input type="radio" name="q10" value="b" id="q10b"><label for="q10b">Permite la automatización de tareas repetitivas.</label></li>
+                  <li><input type="radio" name="q10" value="c" id="q10c"><label for="q10c">La posibilidad de crear contenido falso o engañoso.</label></li>
+                  <li><input type="radio" name="q10" value="d" id="q10d"><label for="q10d">Permite conocer los gustos de la población para crear contenidos adaptados.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q10"></div>
+              </div>
+
+              <!-- 11 -->
+              <div class="question-card" id="card-q11">
+                <div class="question-title">11. La aplicación de la IA en la robótica aún no permite:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q11" value="a" id="q11a"><label for="q11a">Que procesen y analicen grandes cantidades de datos.</label></li>
+                  <li><input type="radio" name="q11" value="b" id="q11b"><label for="q11b">Que puedan aprender de la experiencia.</label></li>
+                  <li><input type="radio" name="q11" value="c" id="q11c"><label for="q11c">Que los robots se encarguen de tareas monótonas y repetitivas.</label></li>
+                  <li><input type="radio" name="q11" value="d" id="q11d"><label for="q11d">Que sientan emociones propias.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q11"></div>
+              </div>
+
+              <!-- 12 -->
+              <div class="question-card" id="card-q12">
+                <div class="question-title">12. Señala la respuesta incorrecta:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q12" value="a" id="q12a"><label for="q12a">La RV y la IA solo se utilizan en el ámbito educativo y no tienen aplicaciones en el entretenimiento.</label></li>
+                  <li><input type="radio" name="q12" value="b" id="q12b"><label for="q12b">La RV y la IA podrían aplicarse a la salud mental, pero no está definido cómo.</label></li>
+                  <li><input type="radio" name="q12" value="c" id="q12c"><label for="q12c">La realidad virtual (RV) y la inteligencia artificial (IA) solo se utilizan para juegos y entretenimiento.</label></li>
+                  <li><input type="radio" name="q12" value="d" id="q12d"><label for="q12d">En el ámbito educativo, con la RV y la IA, los estudiantes podrían aprender en entornos virtuales que simularan situaciones profesionales.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q12"></div>
+              </div>
+
+              <!-- 13 -->
+              <div class="question-card" id="card-q13">
+                <div class="question-title">13. ¿En qué consiste la biometría comportamental?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q13" value="a" id="q13a"><label for="q13a">Toma medidas estandarizadas de seres vivos.</label></li>
+                  <li><input type="radio" name="q13" value="b" id="q13b"><label for="q13b">Analiza patrones genéticos.</label></li>
+                  <li><input type="radio" name="q13" value="c" id="q13c"><label for="q13c">Reconoce solo rasgos faciales.</label></li>
+                  <li><input type="radio" name="q13" value="d" id="q13d"><label for="q13d">Evalúa la forma de caminar y la firma manuscrita.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q13"></div>
+              </div>
+
+              <!-- 14 -->
+              <div class="question-card" id="card-q14">
+                <div class="question-title">14. ¿Cuál es la empresa líder en Inteligencia artificial?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q14" value="a" id="q14a"><label for="q14a">Siemens.</label></li>
+                  <li><input type="radio" name="q14" value="b" id="q14b"><label for="q14b">OpenAI.</label></li>
+                  <li><input type="radio" name="q14" value="c" id="q14c"><label for="q14c">IBM.</label></li>
+                  <li><input type="radio" name="q14" value="d" id="q14d"><label for="q14d">Google.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q14"></div>
+              </div>
+
+              <!-- 15 -->
+              <div class="question-card" id="card-q15">
+                <div class="question-title">15. ¿Cuál de los siguientes es un beneficio clave que resulta de la combinación de la Inteligencia Artificial (IA) y la computación en la nube?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q15" value="a" id="q15a"><label for="q15a">Mayor capacidad para procesar grandes volúmenes de datos y escalar recursos de IA de manera flexible.</label></li>
+                  <li><input type="radio" name="q15" value="b" id="q15b"><label for="q15b">Reducción de la dependencia de la conexión a internet.</label></li>
+                  <li><input type="radio" name="q15" value="c" id="q15c"><label for="q15c">Disminución de la complejidad en la implementación de soluciones de software.</label></li>
+                  <li><input type="radio" name="q15" value="d" id="q15d"><label for="q15d">Aumento de la necesidad de infraestructura física local.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q15"></div>
+              </div>
+
+              <!-- 16 -->
+              <div class="question-card" id="card-q16">
+                <div class="question-title">16. ¿Cuál es una ventaja clave de usar IA en el sector sanitario?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q16" value="a" id="q16a"><label for="q16a">Automatizar completamente las decisiones médicas.</label></li>
+                  <li><input type="radio" name="q16" value="b" id="q16b"><label for="q16b">Detectar patrones en imágenes médicas para apoyar diagnósticos.</label></li>
+                  <li><input type="radio" name="q16" value="c" id="q16c"><label for="q16c">Reemplazar la labor del personal sanitario.</label></li>
+                  <li><input type="radio" name="q16" value="d" id="q16d"><label for="q16d">Eliminar la necesidad de historiales médicos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q16"></div>
+              </div>
+
+              <!-- 17 -->
+              <div class="question-card" id="card-q17">
+                <div class="question-title">17. El mantenimiento predictivo en la industria es posible gracias a…</div>
+                <ul class="options">
+                  <li><input type="radio" name="q17" value="a" id="q17a"><label for="q17a">Robots sociales.</label></li>
+                  <li><input type="radio" name="q17" value="b" id="q17b"><label for="q17b">Drones autónomos.</label></li>
+                  <li><input type="radio" name="q17" value="c" id="q17c"><label for="q17c">Sensores IoT + IA que anticipan fallos.</label></li>
+                  <li><input type="radio" name="q17" value="d" id="q17d"><label for="q17d">Impresoras 3D.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q17"></div>
+              </div>
+
+              <!-- 18 -->
+              <div class="question-card" id="card-q18">
+                <div class="question-title">18. ¿Qué permite la IA en el sector agrícola (Smart Farming)?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q18" value="a" id="q18a"><label for="q18a">Aumentar el uso de agua para asegurar la cosecha.</label></li>
+                  <li><input type="radio" name="q18" value="b" id="q18b"><label for="q18b">Ajustar decisiones en tiempo real gracias a sensores y drones.</label></li>
+                  <li><input type="radio" name="q18" value="c" id="q18c"><label for="q18c">Eliminar completamente el trabajo humano.</label></li>
+                  <li><input type="radio" name="q18" value="d" id="q18d"><label for="q18d">Garantizar cosechas perfectas siempre.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q18"></div>
+              </div>
+
+              <!-- 19 -->
+              <div class="question-card" id="card-q19">
+                <div class="question-title">19. ¿Qué función realizan los sistemas de recomendación usados en comercio y marketing?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q19" value="a" id="q19a"><label for="q19a">Predecir el clima.</label></li>
+                  <li><input type="radio" name="q19" value="b" id="q19b"><label for="q19b">Recomendar productos o contenidos basados en gustos del usuario.</label></li>
+                  <li><input type="radio" name="q19" value="c" id="q19c"><label for="q19c">Crear productos nuevos de forma automática.</label></li>
+                  <li><input type="radio" name="q19" value="d" id="q19d"><label for="q19d">Decidir precios sin intervención humana.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q19"></div>
+              </div>
+
+              <!-- 20 -->
+              <div class="question-card" id="card-q20">
+                <div class="question-title">20. ¿Para qué se utilizan los drones con IA en agricultura?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q20" value="a" id="q20a"><label for="q20a">Realizar pagos automáticos entre empresas.</label></li>
+                  <li><input type="radio" name="q20" value="b" id="q20b"><label for="q20b">Analizar cultivos y detectar plagas mediante visión artificial.</label></li>
+                  <li><input type="radio" name="q20" value="c" id="q20c"><label for="q20c">Sustituir el transporte de mercancías.</label></li>
+                  <li><input type="radio" name="q20" value="d" id="q20d"><label for="q20d">Sustituir la maquinaria pesada.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q20"></div>
+              </div>
+
+              <!-- 21 -->
+              <div class="question-card" id="card-q21">
+                <div class="question-title">21. En el sector financiero, la IA permite:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q21" value="a" id="q21a"><label for="q21a">Realizar diagnósticos médicos.</label></li>
+                  <li><input type="radio" name="q21" value="b" id="q21b"><label for="q21b">Crear arquitecturas de redes neuronales desde cero.</label></li>
+                  <li><input type="radio" name="q21" value="c" id="q21c"><label for="q21c">Detectar operaciones sospechosas y fraudes en tiempo real.</label></li>
+                  <li><input type="radio" name="q21" value="d" id="q21d"><label for="q21d">Aumentar automáticamente los créditos sin evaluación.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q21"></div>
+              </div>
+
+              <!-- 22 -->
+              <div class="question-card" id="card-q22">
+                <div class="question-title">22. ¿Para qué se usan los chatbots basados en IA en empresas?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q22" value="a" id="q22a"><label for="q22a">Diseñar productos físicos.</label></li>
+                  <li><input type="radio" name="q22" value="b" id="q22b"><label for="q22b">Atender clientes 24/7 y resolver dudas comunes.</label></li>
+                  <li><input type="radio" name="q22" value="c" id="q22c"><label for="q22c">Controlar robots industriales.</label></li>
+                  <li><input type="radio" name="q22" value="d" id="q22d"><label for="q22d">Realizar auditorías financieras.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q22"></div>
+              </div>
+
+              <!-- 23 -->
+              <div class="question-card" id="card-q23">
+                <div class="question-title">23. La IA aplicada al transporte permite:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q23" value="a" id="q23a"><label for="q23a">Aumentar la congestión en las ciudades.</label></li>
+                  <li><input type="radio" name="q23" value="b" id="q23b"><label for="q23b">Emitir más gases contaminantes.</label></li>
+                  <li><input type="radio" name="q23" value="c" id="q23c"><label for="q23c">Optimizar rutas, reducir tiempos y mejorar la movilidad.</label></li>
+                  <li><input type="radio" name="q23" value="d" id="q23d"><label for="q23d">Evitar completamente el mantenimiento de vehículos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q23"></div>
+              </div>
+
+              <!-- 24 -->
+              <div class="question-card" id="card-q24">
+                <div class="question-title">24. ¿Qué ventaja aporta la IA a las energías renovables?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q24" value="a" id="q24a"><label for="q24a">Reducir la necesidad de paneles solares.</label></li>
+                  <li><input type="radio" name="q24" value="b" id="q24b"><label for="q24b">Aumentar la dependencia del carbón.</label></li>
+                  <li><input type="radio" name="q24" value="c" id="q24c"><label for="q24c">Predecir la demanda y mejorar el rendimiento energético.</label></li>
+                  <li><input type="radio" name="q24" value="d" id="q24d"><label for="q24d">Generar electricidad sin infraestructura.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q24"></div>
+              </div>
+
+              <!-- 25 -->
+              <div class="question-card" id="card-q25">
+                <div class="question-title">25. ¿Qué característica define a las ciudades inteligentes (Smart Cities)?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q25" value="a" id="q25a"><label for="q25a">Uso de IA e IoT para gestionar tráfico, iluminación y residuos de manera eficiente.</label></li>
+                  <li><input type="radio" name="q25" value="b" id="q25b"><label for="q25b">Ausencia de transporte público.</label></li>
+                  <li><input type="radio" name="q25" value="c" id="q25c"><label for="q25c">Reemplazo total de los trabajadores municipales.</label></li>
+                  <li><input type="radio" name="q25" value="d" id="q25d"><label for="q25d">No utilización de sensores ni datos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q25"></div>
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" class="btn primary" id="submit-quiz">Corregir test</button>
+              <button type="reset" class="btn" id="reset-quiz">Reiniciar</button>
+            </div>
+            <div class="score" id="score"></div>
+            <div id="corrections"></div>
+          </form>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const correctAnswers = {
+      q1:'d', q2:'b', q3:'a', q4:'a', q5:'a',
+      q6:'d', q7:'c', q8:'a', q9:'b', q10:'c',
+      q11:'d', q12:'a', q13:'d', q14:'d', q15:'a',
+      q16:'b', q17:'c', q18:'b', q19:'b', q20:'b',
+      q21:'c', q22:'b', q23:'c', q24:'c', q25:'a'
+    };
+
+    const submitBtn = document.getElementById('submit-quiz');
+    const resetBtn = document.getElementById('reset-quiz');
+    const scoreEl = document.getElementById('score');
+    const correctionsEl = document.getElementById('corrections');
+
+    submitBtn.addEventListener('click', () => {
+      let score = 0;
+      const total = Object.keys(correctAnswers).length;
+      const incorrect = [];
+
+      Object.entries(correctAnswers).forEach(([q, correct], index) => {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        const feedback = document.getElementById(`feedback-${q}`);
+        const card = document.getElementById(`card-${q}`);
+
+        // limpiar estilos previos
+        feedback.textContent = '';
+        feedback.classList.remove('correct', 'incorrect');
+        card.style.borderColor = 'rgba(148,163,184,.35)';
+
+        const title = card.querySelector('.question-title').textContent.trim();
+        const radios = card.querySelectorAll('input[type="radio"]');
+        let userAnswerText = 'No respondida';
+        let correctAnswerText = '';
+
+        radios.forEach(r => {
+          const labelText = r.nextElementSibling.textContent.trim();
+          if (r.value === correct) {
+            correctAnswerText = labelText;
+          }
+          if (selected && r === selected) {
+            userAnswerText = labelText;
+          }
+        });
+
+        if (!selected) {
+          feedback.textContent = '⚠️ Pregunta sin responder.';
+          feedback.classList.add('incorrect');
+          card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
+          return;
+        }
+
+        if (selected.value === correct) {
+          score++;
+          feedback.textContent = '✅ Correcta';
+          feedback.classList.add('correct');
+          card.style.borderColor = '#4ade80';
+        } else {
+          feedback.textContent = '❌ Incorrecta';
+          feedback.classList.add('incorrect');
+          card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
+        }
+      });
+
+      if (total === 0) return;
+
+      const grade = (score / total) * 10;
+      scoreEl.innerHTML = `Has acertado <span>${score}</span> de ${total} preguntas. Nota aproximada: <strong>${grade.toFixed(2)} / 10</strong>.`;
+
+      if (incorrect.length === 0) {
+        correctionsEl.innerHTML = "<p>🎉 No has cometido ningún error. ¡Test perfecto!</p>";
+      } else {
+        let html = "<p><strong>Errores y correcciones:</strong></p><ul>";
+        incorrect.forEach(item => {
+          html += "<li>";
+          html += "<strong>Pregunta " + item.number + ":</strong> " + item.text + "<br>";
+          html += "<span style='color:#f97373;'>Tu respuesta: " + item.userAnswer + "</span><br>";
+          html += "<span style='color:#4ade80;'>Respuesta correcta: " + item.correctAnswer + "</span>";
+          html += "</li>";
+        });
+        html += "</ul>";
+        correctionsEl.innerHTML = html;
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      Object.keys(correctAnswers).forEach((q) => {
+        const feedback = document.getElementById(`feedback-${q}`);
+        const card = document.getElementById(`card-${q}`);
+        if (feedback) {
+          feedback.textContent = '';
+          feedback.classList.remove('correct', 'incorrect');
+        }
+        if (card) {
+          card.style.borderColor = 'rgba(148,163,184,.35)';
+        }
+      });
+      scoreEl.textContent = '';
+      correctionsEl.innerHTML = '';
+    });
+  </script>
+</body>
+</html>

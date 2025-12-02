@@ -257,6 +257,127 @@
       color: var(--text-muted);
       margin-top: 2px;
     }
+
+    /* === ESTILOS QUIZ GLOBAL (40 PREGUNTAS) === */
+    .quiz-section {
+      margin-top: 24px;
+    }
+
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .quiz-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .quiz-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .question-card {
+      background: rgba(15,23,42,.96);
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,.35);
+      padding: 10px 12px 12px;
+      font-size: 0.86rem;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .question-card:hover {
+      border-color: rgba(94,234,212,.7);
+      box-shadow: 0 12px 25px rgba(15,23,42,.8);
+      background: radial-gradient(circle at top, rgba(45,212,191,.04), rgba(15,23,42,.98));
+    }
+
+    .question-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.88rem;
+      color: #e5e7eb;
+    }
+
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 3px;
+    }
+
+    .options li {
+      margin-bottom: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .options input[type="radio"] {
+      margin-top: 2px;
+      accent-color: #22c55e;
+    }
+
+    .feedback {
+      margin-top: 3px;
+      font-size: 0.8rem;
+      min-height: 16px;
+    }
+
+    .feedback.correct {
+      color: #4ade80;
+    }
+
+    .feedback.incorrect {
+      color: #f97373;
+    }
+
+    .quiz-actions {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .score {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .score span {
+      color: #4ade80;
+    }
+
+    #corrections {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      background: rgba(15,23,42,.96);
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,.5);
+      padding: 10px 12px;
+    }
+
+    #corrections ul {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    #corrections li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -523,396 +644,624 @@
         </article>
       </div>
 
-      <!-- QUIZ UF6 · IA y Análisis de datos -->
-      <section id="quiz-uf6" style="margin-top: 20px;">
+      <!-- === QUIZ UF6 · 40 PREGUNTAS CON ERRORES Y CORRECCIONES === -->
+      <section class="quiz-section">
         <article class="card">
-          <div class="badge"><span></span>Quiz UF6 · IA y análisis de datos</div>
-          <h2>Cuestionario de repaso (25 preguntas)</h2>
-          <p class="subtitle">
-            Responde a las preguntas tipo test sobre inteligencia artificial, Big Data y ciencia de datos.
-          </p>
-
-          <div id="quiz-question" style="margin-top: 10px; font-size: 0.95rem;"></div>
-
-          <form id="quiz-form" style="margin-top: 10px;">
-            <div id="quiz-options"></div>
-
-            <div class="actions" style="margin-top: 12px;">
-              <button type="button" class="btn primary" id="quiz-next">
-                Comprobar y siguiente
-              </button>
+          <div class="quiz-header">
+            <div>
+              <div class="quiz-title">Quiz UF6 · 40 preguntas</div>
+              <div class="quiz-subtitle">Responde y pulsa <strong>“Corregir test”</strong> para ver tu nota y qué has fallado.</div>
             </div>
-          </form>
+          </div>
 
-          <p id="quiz-feedback" style="margin-top: 8px; font-size: 0.85rem;"></p>
-          <p id="quiz-progress" style="margin-top: 4px; font-size: 0.8rem; color: #9ca3af;"></p>
+          <form id="quiz-form">
+            <div class="question-grid">
+              <!-- 1 -->
+              <div class="question-card" id="card-q1">
+                <div class="question-title">1. ¿Cómo aprende la máquina en el enfoque de aprendizaje por refuerzo?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q1" value="a" id="q1a"><label for="q1a">Utilizando únicamente datos supervisados.</label></li>
+                  <li><input type="radio" name="q1" value="b" id="q1b"><label for="q1b">A través de la experiencia y ensayo-error.</label></li>
+                  <li><input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Mostrándole miles de datos etiquetados.</label></li>
+                  <li><input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Buscando similitudes entre datos sin etiquetas.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q1"></div>
+              </div>
+
+              <!-- 2 -->
+              <div class="question-card" id="card-q2">
+                <div class="question-title">2. ¿Cómo se agrupa la inteligencia artificial?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q2" value="a" id="q2a"><label for="q2a">IA débil y fuerte.</label></li>
+                  <li><input type="radio" name="q2" value="b" id="q2b"><label for="q2b">IA general y específica.</label></li>
+                  <li><input type="radio" name="q2" value="c" id="q2c"><label for="q2c">IA única y fuerte.</label></li>
+                  <li><input type="radio" name="q2" value="d" id="q2d"><label for="q2d">IA estrecha y débil.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q2"></div>
+              </div>
+
+              <!-- 3 -->
+              <div class="question-card" id="card-q3">
+                <div class="question-title">3. ¿Qué tipo de Inteligencia Artificial se especializa en realizar una única tarea específica y no posee conciencia o autoconocimiento?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q3" value="a" id="q3a"><label for="q3a">Superinteligencia Artificial (ASI).</label></li>
+                  <li><input type="radio" name="q3" value="b" id="q3b"><label for="q3b">Inteligencia Artificial Débil (IA Débil).</label></li>
+                  <li><input type="radio" name="q3" value="c" id="q3c"><label for="q3c">Inteligencia Artificial General (IAG).</label></li>
+                  <li><input type="radio" name="q3" value="d" id="q3d"><label for="q3d">Inteligencia Artificial Fuerte (IA Fuerte).</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q3"></div>
+              </div>
+
+              <!-- 4 -->
+              <div class="question-card" id="card-q4">
+                <div class="question-title">4. ¿Cuál de las siguientes afirmaciones no es un requisito clave para que un sistema se considere “inteligencia artificial”?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q4" value="a" id="q4a"><label for="q4a">Ser capaz de entender y procesar el lenguaje natural, tanto hablado como escrito.</label></li>
+                  <li><input type="radio" name="q4" value="b" id="q4b"><label for="q4b">Ser capaz de funcionar únicamente con intervención humana directa.</label></li>
+                  <li><input type="radio" name="q4" value="c" id="q4c"><label for="q4c">Ser capaz de aprender de la experiencia.</label></li>
+                  <li><input type="radio" name="q4" value="d" id="q4d"><label for="q4d">Ser capaz de adaptarse a diferentes situaciones y entornos sin intervención humana.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q4"></div>
+              </div>
+
+              <!-- 5 -->
+              <div class="question-card" id="card-q5">
+                <div class="question-title">5. El término empleado para describir el momento en el que la inteligencia artificial pueda programarse a sí misma se conoce como:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q5" value="a" id="q5a"><label for="q5a">Cíborg.</label></li>
+                  <li><input type="radio" name="q5" value="b" id="q5b"><label for="q5b">Singularidad tecnológica.</label></li>
+                  <li><input type="radio" name="q5" value="c" id="q5c"><label for="q5c">Desarrollo exponencial.</label></li>
+                  <li><input type="radio" name="q5" value="d" id="q5d"><label for="q5d">Fusión hombre-máquina.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q5"></div>
+              </div>
+
+              <!-- 6 -->
+              <div class="question-card" id="card-q6">
+                <div class="question-title">6. ¿Qué enfoques de enseñanza se utilizan en la actualidad para la IA?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q6" value="a" id="q6a"><label for="q6a">Aprendizaje supervisado, no supervisado y por refuerzo.</label></li>
+                  <li><input type="radio" name="q6" value="b" id="q6b"><label for="q6b">Aprendizaje supervisado.</label></li>
+                  <li><input type="radio" name="q6" value="c" id="q6c"><label for="q6c">Aprendizaje por refuerzo y transferencia exclusivamente.</label></li>
+                  <li><input type="radio" name="q6" value="d" id="q6d"><label for="q6d">Aprendizaje supervisado y no supervisado.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q6"></div>
+              </div>
+
+              <!-- 7 -->
+              <div class="question-card" id="card-q7">
+                <div class="question-title">7. Los desarrolladores de IA, ¿en qué se enfocan para su creación?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q7" value="a" id="q7a"><label for="q7a">En una amplia gama de capacidades diversas.</label></li>
+                  <li><input type="radio" name="q7" value="b" id="q7b"><label for="q7b">Exclusivamente en habilidades sociales.</label></li>
+                  <li><input type="radio" name="q7" value="c" id="q7c"><label for="q7c">Solo en la creatividad y la comprensión del lenguaje.</label></li>
+                  <li><input type="radio" name="q7" value="d" id="q7d"><label for="q7d">Únicamente en la capacidad de razonamiento lógico.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q7"></div>
+              </div>
+
+              <!-- 8 -->
+              <div class="question-card" id="card-q8">
+                <div class="question-title">8. Uno de los temores asociados con la IA avanzada es:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q8" value="a" id="q8a"><label for="q8a">La imposibilidad de mejorar la capacidad de procesamiento de datos.</label></li>
+                  <li><input type="radio" name="q8" value="b" id="q8b"><label for="q8b">La aparición de máquinas superinteligentes que tomen el control sobre los humanos.</label></li>
+                  <li><input type="radio" name="q8" value="c" id="q8c"><label for="q8c">El desarrollo de una inteligencia artificial que no pueda superar la inteligencia humana.</label></li>
+                  <li><input type="radio" name="q8" value="d" id="q8d"><label for="q8d">La creación de una sociedad sin tecnologías más avanzadas de las que hay a día de hoy.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q8"></div>
+              </div>
+
+              <!-- 9 -->
+              <div class="question-card" id="card-q9">
+                <div class="question-title">9. Un ejemplo de fusión hombre-máquina que ya se utiliza hoy en día es:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q9" value="a" id="q9a"><label for="q9a">Coches autónomos.</label></li>
+                  <li><input type="radio" name="q9" value="b" id="q9b"><label for="q9b">Asistentes de voz.</label></li>
+                  <li><input type="radio" name="q9" value="c" id="q9c"><label for="q9c">Implantes dentales.</label></li>
+                  <li><input type="radio" name="q9" value="d" id="q9d"><label for="q9d">Móviles.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q9"></div>
+              </div>
+
+              <!-- 10 -->
+              <div class="question-card" id="card-q10">
+                <div class="question-title">10. ¿Qué avance fue clave en los años 2010 para que la inteligencia artificial pudiera realizar tareas complejas como el reconocimiento de imágenes?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q10" value="a" id="q10a"><label for="q10a">Máquinas de soporte vectorial.</label></li>
+                  <li><input type="radio" name="q10" value="b" id="q10b"><label for="q10b">Redes neuronales y deep learning.</label></li>
+                  <li><input type="radio" name="q10" value="c" id="q10c"><label for="q10c">Algoritmos genéticos.</label></li>
+                  <li><input type="radio" name="q10" value="d" id="q10d"><label for="q10d">ChatGPT.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q10"></div>
+              </div>
+
+              <!-- 11 -->
+              <div class="question-card" id="card-q11">
+                <div class="question-title">11. La razón principal por la que el deep learning se considera más eficaz que el machine learning es porque:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q11" value="a" id="q11a"><label for="q11a">Emplea árboles de elección.</label></li>
+                  <li><input type="radio" name="q11" value="b" id="q11b"><label for="q11b">Es una forma de trabajar mucho más barata.</label></li>
+                  <li><input type="radio" name="q11" value="c" id="q11c"><label for="q11c">El diseño de la red neuronal artificial se inspira en el cerebro humano.</label></li>
+                  <li><input type="radio" name="q11" value="d" id="q11d"><label for="q11d">Crea una red neuronal artificial que nunca comete errores.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q11"></div>
+              </div>
+
+              <!-- 12 -->
+              <div class="question-card" id="card-q12">
+                <div class="question-title">12. ¿Qué inteligencia humana posibilita la observación del entorno para interpretarlo y, además, genera imágenes inexistentes?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q12" value="a" id="q12a"><label for="q12a">Espacial.</label></li>
+                  <li><input type="radio" name="q12" value="b" id="q12b"><label for="q12b">Naturalista.</label></li>
+                  <li><input type="radio" name="q12" value="c" id="q12c"><label for="q12c">Musical.</label></li>
+                  <li><input type="radio" name="q12" value="d" id="q12d"><label for="q12d">Corporal.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q12"></div>
+              </div>
+
+              <!-- 13 -->
+              <div class="question-card" id="card-q13">
+                <div class="question-title">13. El principal objetivo de los cíborgs sería:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q13" value="a" id="q13a"><label for="q13a">Limitar las capacidades naturales del ser humano.</label></li>
+                  <li><input type="radio" name="q13" value="b" id="q13b"><label for="q13b">Alimentar de conciencia humana a la tecnología.</label></li>
+                  <li><input type="radio" name="q13" value="c" id="q13c"><label for="q13c">Mejorar las capacidades del ser humano mediante la implantación de tecnología en su organismo.</label></li>
+                  <li><input type="radio" name="q13" value="d" id="q13d"><label for="q13d">Eliminar cualquier elemento tecnológico del organismo humano.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q13"></div>
+              </div>
+
+              <!-- 14 -->
+              <div class="question-card" id="card-q14">
+                <div class="question-title">14. ¿Cuál es la definición de inteligencia según la teoría de Howard Gardner?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q14" value="a" id="q14a"><label for="q14a">Capacidad mental de resolver problemas y/o elaborar productos valiosos para una cultura.</label></li>
+                  <li><input type="radio" name="q14" value="b" id="q14b"><label for="q14b">Aptitud general e innata.</label></li>
+                  <li><input type="radio" name="q14" value="c" id="q14c"><label for="q14c">Conjunto de habilidades lógico-matemáticas.</label></li>
+                  <li><input type="radio" name="q14" value="d" id="q14d"><label for="q14d">Medida específica de la capacidad verbal.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q14"></div>
+              </div>
+
+              <!-- 15 -->
+              <div class="question-card" id="card-q15">
+                <div class="question-title">15. ¿Qué es ChatGPT?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q15" value="a" id="q15a"><label for="q15a">Un lenguaje digital.</label></li>
+                  <li><input type="radio" name="q15" value="b" id="q15b"><label for="q15b">Un asistente virtual que te permite aprender.</label></li>
+                  <li><input type="radio" name="q15" value="c" id="q15c"><label for="q15c">Un asistente que permite modificar el entorno.</label></li>
+                  <li><input type="radio" name="q15" value="d" id="q15d"><label for="q15d">Una herramienta de comunicación entre empresas.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q15"></div>
+              </div>
+
+              <!-- 16 -->
+              <div class="question-card" id="card-q16">
+                <div class="question-title">16. ¿Qué es un dato?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q16" value="a" id="q16a"><label for="q16a">Una interpretación subjetiva de la realidad.</label></li>
+                  <li><input type="radio" name="q16" value="b" id="q16b"><label for="q16b">Un conjunto de decisiones tomadas en una empresa.</label></li>
+                  <li><input type="radio" name="q16" value="c" id="q16c"><label for="q16c">Un hecho registrado sin procesar y sin contexto.</label></li>
+                  <li><input type="radio" name="q16" value="d" id="q16d"><label for="q16d">Un gráfico que resume información.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q16"></div>
+              </div>
+
+              <!-- 17 -->
+              <div class="question-card" id="card-q17">
+                <div class="question-title">17. ¿En qué fase del ciclo de vida del dato se generan dashboards, informes y gráficos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q17" value="a" id="q17a"><label for="q17a">Captura.</label></li>
+                  <li><input type="radio" name="q17" value="b" id="q17b"><label for="q17b">Almacenamiento.</label></li>
+                  <li><input type="radio" name="q17" value="c" id="q17c"><label for="q17c">Procesamiento y visualización.</label></li>
+                  <li><input type="radio" name="q17" value="d" id="q17d"><label for="q17d">Uso operativo.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q17"></div>
+              </div>
+
+              <!-- 18 -->
+              <div class="question-card" id="card-q18">
+                <div class="question-title">18. ¿En qué ayuda principalmente el Big Data a una empresa?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q18" value="a" id="q18a"><label for="q18a">A eliminar la necesidad de personal cualificado.</label></li>
+                  <li><input type="radio" name="q18" value="b" id="q18b"><label for="q18b">A descubrir patrones y tomar decisiones basadas en datos.</label></li>
+                  <li><input type="radio" name="q18" value="c" id="q18c"><label for="q18c">A evitar cualquier tipo de inversión tecnológica.</label></li>
+                  <li><input type="radio" name="q18" value="d" id="q18d"><label for="q18d">A reducir la cantidad de información disponible.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q18"></div>
+              </div>
+
+              <!-- 19 -->
+              <div class="question-card" id="card-q19">
+                <div class="question-title">19. Un ejemplo del uso del Big Data en sanidad es:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q19" value="a" id="q19a"><label for="q19a">Imprimir recetas médicas en papel.</label></li>
+                  <li><input type="radio" name="q19" value="b" id="q19b"><label for="q19b">Guardar las historias clínicas en archivadores físicos.</label></li>
+                  <li><input type="radio" name="q19" value="c" id="q19c"><label for="q19c">Detectar enfermedades antes de que aparezcan síntomas.</label></li>
+                  <li><input type="radio" name="q19" value="d" id="q19d"><label for="q19d">Quitar la tecnología de los hospitales.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q19"></div>
+              </div>
+
+              <!-- 20 -->
+              <div class="question-card" id="card-q20">
+                <div class="question-title">20. En ciencia de datos, la fase en la que se visualizan datos, se buscan patrones y se detectan tendencias se llama:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q20" value="a" id="q20a"><label for="q20a">Modelado de datos.</label></li>
+                  <li><input type="radio" name="q20" value="b" id="q20b"><label for="q20b">Implementación.</label></li>
+                  <li><input type="radio" name="q20" value="c" id="q20c"><label for="q20c">Análisis exploratorio de datos (EDA).</label></li>
+                  <li><input type="radio" name="q20" value="d" id="q20d"><label for="q20d">Definición del problema.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q20"></div>
+              </div>
+
+              <!-- 21 -->
+              <div class="question-card" id="card-q21">
+                <div class="question-title">21. ¿Qué tipo de aprendizaje utiliza datos sin etiquetar para encontrar grupos o patrones?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q21" value="a" id="q21a"><label for="q21a">Aprendizaje supervisado.</label></li>
+                  <li><input type="radio" name="q21" value="b" id="q21b"><label for="q21b">Aprendizaje no supervisado.</label></li>
+                  <li><input type="radio" name="q21" value="c" id="q21c"><label for="q21c">Aprendizaje por refuerzo.</label></li>
+                  <li><input type="radio" name="q21" value="d" id="q21d"><label for="q21d">Aprendizaje supervisado por refuerzo.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q21"></div>
+              </div>
+
+              <!-- 22 -->
+              <div class="question-card" id="card-q22">
+                <div class="question-title">22. ¿Qué “V” del Big Data se refiere a la fiabilidad y exactitud de los datos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q22" value="a" id="q22a"><label for="q22a">Volumen.</label></li>
+                  <li><input type="radio" name="q22" value="b" id="q22b"><label for="q22b">Velocidad.</label></li>
+                  <li><input type="radio" name="q22" value="c" id="q22c"><label for="q22c">Veracidad.</label></li>
+                  <li><input type="radio" name="q22" value="d" id="q22d"><label for="q22d">Valor.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q22"></div>
+              </div>
+
+              <!-- 23 -->
+              <div class="question-card" id="card-q23">
+                <div class="question-title">23. Una Inteligencia Artificial que superara ampliamente la inteligencia humana en todos los ámbitos se denomina:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q23" value="a" id="q23a"><label for="q23a">Inteligencia Artificial Débil.</label></li>
+                  <li><input type="radio" name="q23" value="b" id="q23b"><label for="q23b">Inteligencia Artificial General.</label></li>
+                  <li><input type="radio" name="q23" value="c" id="q23c"><label for="q23c">Superinteligencia Artificial (ASI).</label></li>
+                  <li><input type="radio" name="q23" value="d" id="q23d"><label for="q23d">Inteligencia Natural.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q23"></div>
+              </div>
+
+              <!-- 24 -->
+              <div class="question-card" id="card-q24">
+                <div class="question-title">24. ¿Qué característica diferencia principalmente a la IA de un programa tradicional?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q24" value="a" id="q24a"><label for="q24a">Que siempre necesita conexión a Internet.</label></li>
+                  <li><input type="radio" name="q24" value="b" id="q24b"><label for="q24b">Que puede aprender y adaptarse a partir de datos.</label></li>
+                  <li><input type="radio" name="q24" value="c" id="q24c"><label for="q24c">Que solo funciona con instrucciones fijas.</label></li>
+                  <li><input type="radio" name="q24" value="d" id="q24d"><label for="q24d">Que no puede tomar decisiones.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q24"></div>
+              </div>
+
+              <!-- 25 -->
+              <div class="question-card" id="card-q25">
+                <div class="question-title">25. ¿Cómo se define la ciencia de datos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q25" value="a" id="q25a"><label for="q25a">Un conjunto de leyes para regular el uso de datos.</label></li>
+                  <li><input type="radio" name="q25" value="b" id="q25b"><label for="q25b">Un solo algoritmo usado para clasificar información.</label></li>
+                  <li><input type="radio" name="q25" value="c" id="q25c"><label for="q25c">Un campo multidisciplinar que extrae conocimiento de los datos usando métodos científicos.</label></li>
+                  <li><input type="radio" name="q25" value="d" id="q25d"><label for="q25d">Un servidor donde se almacenan grandes volúmenes de información.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q25"></div>
+              </div>
+
+              <!-- 26 -->
+              <div class="question-card" id="card-q26">
+                <div class="question-title">26. ¿Cuáles son las dimensiones que conforman el Big Data, también conocidas como “las 5 V”?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q26" value="a" id="q26a"><label for="q26a">Volumen, Velocidad, Variedad, Veracidad y Valor.</label></li>
+                  <li><input type="radio" name="q26" value="b" id="q26b"><label for="q26b">Volumen, Velocidad, Varianza, Valor y Veracidad.</label></li>
+                  <li><input type="radio" name="q26" value="c" id="q26c"><label for="q26c">Variabilidad, Velocidad, Vaguedad, Volumen y Verificación.</label></li>
+                  <li><input type="radio" name="q26" value="d" id="q26d"><label for="q26d">Volumen, Valor, Versatilidad, Velocidad y Vaguedad.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q26"></div>
+              </div>
+
+              <!-- 27 -->
+              <div class="question-card" id="card-q27">
+                <div class="question-title">27. La dimensión «volumen» en las 5 V del Big Data implica:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q27" value="a" id="q27a"><label for="q27a">La certeza de los datos para tomar decisiones correctas.</label></li>
+                  <li><input type="radio" name="q27" value="b" id="q27b"><label for="q27b">El aumento constante en la cantidad de datos generados o procesados por una empresa.</label></li>
+                  <li><input type="radio" name="q27" value="c" id="q27c"><label for="q27c">La rapidez del análisis de los datos.</label></li>
+                  <li><input type="radio" name="q27" value="d" id="q27d"><label for="q27d">La variedad de fuentes de datos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q27"></div>
+              </div>
+
+              <!-- 28 -->
+              <div class="question-card" id="card-q28">
+                <div class="question-title">28. Tener demasiados datos:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q28" value="a" id="q28a"><label for="q28a">Facilita la información de lo importante.</label></li>
+                  <li><input type="radio" name="q28" value="b" id="q28b"><label for="q28b">Ayuda en la toma de decisiones.</label></li>
+                  <li><input type="radio" name="q28" value="c" id="q28c"><label for="q28c">Puede paralizar o entorpece al complicar la identificación de lo realmente importante.</label></li>
+                  <li><input type="radio" name="q28" value="d" id="q28d"><label for="q28d">Simplifica el enfoque.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q28"></div>
+              </div>
+
+              <!-- 29 -->
+              <div class="question-card" id="card-q29">
+                <div class="question-title">29. Señala la opción correcta entre el deep learning y el machine learning:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q29" value="a" id="q29a"><label for="q29a">El machine learning es más avanzado que el deep learning.</label></li>
+                  <li><input type="radio" name="q29" value="b" id="q29b"><label for="q29b">Ambos conceptos son sinónimos.</label></li>
+                  <li><input type="radio" name="q29" value="c" id="q29c"><label for="q29c">El deep learning es una forma avanzada de machine learning que utiliza redes neuronales artificiales para tareas más complejas.</label></li>
+                  <li><input type="radio" name="q29" value="d" id="q29d"><label for="q29d">El deep learning utiliza algoritmos y modelos estadísticos, mientras que el machine learning utiliza redes neuronales artificiales.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q29"></div>
+              </div>
+
+              <!-- 30 -->
+              <div class="question-card" id="card-q30">
+                <div class="question-title">30. ¿Cuál es la principal diferencia entre datos e información?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q30" value="a" id="q30a"><label for="q30a">Los datos son hechos sin procesar, mientras que la información se ha interpretado y comunicado.</label></li>
+                  <li><input type="radio" name="q30" value="b" id="q30b"><label for="q30b">Los conceptos de datos e información son sinónimos.</label></li>
+                  <li><input type="radio" name="q30" value="c" id="q30c"><label for="q30c">La información es la materia prima necesaria para producir datos.</label></li>
+                  <li><input type="radio" name="q30" value="d" id="q30d"><label for="q30d">Los datos se convierten en información automáticamente.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q30"></div>
+              </div>
+
+              <!-- 31 -->
+              <div class="question-card" id="card-q31">
+                <div class="question-title">31. ¿Cuál de las siguientes afirmaciones es verdadera sobre la inteligencia artificial, el machine learning y el deep learning?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q31" value="a" id="q31a"><label for="q31a">El deep learning es más avanzado que el machine learning y no forma parte de la inteligencia artificial.</label></li>
+                  <li><input type="radio" name="q31" value="b" id="q31b"><label for="q31b">Tanto el machine learning como el deep learning posibilitan el aprendizaje automático y profundo de los sistemas de inteligencia artificial.</label></li>
+                  <li><input type="radio" name="q31" value="c" id="q31c"><label for="q31c">La inteligencia artificial y el machine learning son términos intercambiables que describen el mismo concepto.</label></li>
+                  <li><input type="radio" name="q31" value="d" id="q31d"><label for="q31d">La inteligencia artificial se refiere exclusivamente al uso de algoritmos tradicionales para resolver problemas complejos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q31"></div>
+              </div>
+
+              <!-- 32 -->
+              <div class="question-card" id="card-q32">
+                <div class="question-title">32. El objetivo de la fase de «Uso operativo» es:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q32" value="a" id="q32a"><label for="q32a">Emplear datos procesados para apoyar la toma de decisiones.</label></li>
+                  <li><input type="radio" name="q32" value="b" id="q32b"><label for="q32b">Eliminar datos al final de su vida útil.</label></li>
+                  <li><input type="radio" name="q32" value="c" id="q32c"><label for="q32c">Procesar y analizar datos para extraer información valiosa.</label></li>
+                  <li><input type="radio" name="q32" value="d" id="q32d"><label for="q32d">Almacenar datos en la nube.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q32"></div>
+              </div>
+
+              <!-- 33 -->
+              <div class="question-card" id="card-q33">
+                <div class="question-title">33. Podría definirse el Big Data como:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q33" value="a" id="q33a"><label for="q33a">Datos pequeños, lentos o simples de procesar.</label></li>
+                  <li><input type="radio" name="q33" value="b" id="q33b"><label for="q33b">Datos que son tan grandes, rápidos o complejos que son difíciles de procesar con métodos tradicionales.</label></li>
+                  <li><input type="radio" name="q33" value="c" id="q33c"><label for="q33c">Datos que no tienen relevancia para las empresas.</label></li>
+                  <li><input type="radio" name="q33" value="d" id="q33d"><label for="q33d">Datos que son fáciles de procesar con métodos tradicionales.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q33"></div>
+              </div>
+
+              <!-- 34 -->
+              <div class="question-card" id="card-q34">
+                <div class="question-title">34. ¿Cuál de las siguientes frases describe mejor a la ciencia de datos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q34" value="a" id="q34a"><label for="q34a">Un campo especializado en la recopilación de datos masivos.</label></li>
+                  <li><input type="radio" name="q34" value="b" id="q34b"><label for="q34b">La aplicación exclusiva de técnicas de aprendizaje automático.</label></li>
+                  <li><input type="radio" name="q34" value="c" id="q34c"><label for="q34c">Un campo multidisciplinario que utiliza métodos científicos para extraer conocimientos de datos.</label></li>
+                  <li><input type="radio" name="q34" value="d" id="q34d"><label for="q34d">Un enfoque centrado en la visualización de datos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q34"></div>
+              </div>
+
+              <!-- 35 -->
+              <div class="question-card" id="card-q35">
+                <div class="question-title">35. ¿Qué palabra se usa para nombrar a los objetos inteligentes que se pueden llevar en el cuerpo, como relojes, pulseras o auriculares capaces de tomar datos de constantes biológicas?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q35" value="a" id="q35a"><label for="q35a">Chatbot.</label></li>
+                  <li><input type="radio" name="q35" value="b" id="q35b"><label for="q35b">Wearables.</label></li>
+                  <li><input type="radio" name="q35" value="c" id="q35c"><label for="q35c">KPI.</label></li>
+                  <li><input type="radio" name="q35" value="d" id="q35d"><label for="q35d">Dashboard.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q35"></div>
+              </div>
+
+              <!-- 36 -->
+              <div class="question-card" id="card-q36">
+                <div class="question-title">36. ¿Cómo puede beneficiarse el sector bancario mediante la aplicación de Big Data?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q36" value="a" id="q36a"><label for="q36a">Desarrollando software colaborativo para aumentar la productividad de los empleados.</label></li>
+                  <li><input type="radio" name="q36" value="b" id="q36b"><label for="q36b">Analizando grandes volúmenes de datos para detectar patrones de comportamiento de los clientes y mejorar la personalización de servicios financieros.</label></li>
+                  <li><input type="radio" name="q36" value="c" id="q36c"><label for="q36c">Creando nuevas redes sociales internas para mejorar la comunicación interna.</label></li>
+                  <li><input type="radio" name="q36" value="d" id="q36d"><label for="q36d">Mejorando la eficiencia operativa a través de la automatización de procesos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q36"></div>
+              </div>
+
+              <!-- 37 -->
+              <div class="question-card" id="card-q37">
+                <div class="question-title">37. ¿Cuál de los siguientes es un desafío común asociado con la gestión y el uso efectivo del Big Data?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q37" value="a" id="q37a"><label for="q37a">La facilidad con la que se pueden extraer conclusiones precisas de cualquier conjunto de datos grande.</label></li>
+                  <li><input type="radio" name="q37" value="b" id="q37b"><label for="q37b">La necesidad de invertir en infraestructura y personal capacitado para manejar y analizar el vasto volumnen de datos.</label></li>
+                  <li><input type="radio" name="q37" value="c" id="q37c"><label for="q37c">La dificultad de generar suficientes datos para el análisis.</label></li>
+                  <li><input type="radio" name="q37" value="d" id="q37d"><label for="q37d">La falta de herramientas disponibles para procesar grandes volúmenes de información.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q37"></div>
+              </div>
+
+              <!-- 38 -->
+              <div class="question-card" id="card-q38">
+                <div class="question-title">38. Los datos se convierten en información:</div>
+                <ul class="options">
+                  <li><input type="radio" name="q38" value="a" id="q38a"><label for="q38a">En la fase de «Procesamiento y visualización».</label></li>
+                  <li><input type="radio" name="q38" value="b" id="q38b"><label for="q38b">En la fase de «Captura».</label></li>
+                  <li><input type="radio" name="q38" value="c" id="q38c"><label for="q38c">En la fase de «Uso operativo».</label></li>
+                  <li><input type="radio" name="q38" value="d" id="q38d"><label for="q38d">En la fase de «Almacenamiento».</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q38"></div>
+              </div>
+
+              <!-- 39 -->
+              <div class="question-card" id="card-q39">
+                <div class="question-title">39. ¿Cuál de las siguientes afirmaciones describe mejor la relación entre Big Data y el análisis de datos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q39" value="a" id="q39a"><label for="q39a">El Big Data se refiere únicamente a la recolección de datos, mientras que el análisis de datos es el proceso de visualizarlos.</label></li>
+                  <li><input type="radio" name="q39" value="b" id="q39b"><label for="q39b">El análisis de datos es la tecnología que permite almacenar grandes volúmenes de información y el Big Data es el resultado de ese almacenamiento.</label></li>
+                  <li><input type="radio" name="q39" value="c" id="q39c"><label for="q39c">El Big Data se refiere a conjuntos de datos tan grandes y complejos que los métodos tradicionales no pueden procesar, y el análisis de datos es el proceso de examinar estos conjuntos para descubrir patrones y extraer información útil.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q39"></div>
+              </div>
+
+              <!-- 40 -->
+              <div class="question-card" id="card-q40">
+                <div class="question-title">40. ¿Qué implica el ciclo de vida de los datos?</div>
+                <ul class="options">
+                  <li><input type="radio" name="q40" value="a" id="q40a"><label for="q40a">Una secuencia lineal de eventos.</label></li>
+                  <li><input type="radio" name="q40" value="b" id="q40b"><label for="q40b">Una serie de fases desde la creación hasta la eliminación o archivado de los datos.</label></li>
+                  <li><input type="radio" name="q40" value="c" id="q40c"><label for="q40c">La recopilación de datos sin un orden concreto.</label></li>
+                  <li><input type="radio" name="q40" value="d" id="q40d"><label for="q40d">Un proceso exclusivo de captura de datos.</label></li>
+                </ul>
+                <div class="feedback" id="feedback-q40"></div>
+              </div>
+            </div>
+
+            <div class="quiz-actions">
+              <button type="button" class="btn primary" id="submit-quiz">Corregir test</button>
+              <button type="reset" class="btn" id="reset-quiz">Reiniciar</button>
+            </div>
+            <div class="score" id="score"></div>
+            <div id="corrections"></div>
+          </form>
         </article>
       </section>
     </main>
   </div>
 
   <script>
-    // --- Banco de preguntas del Quiz UF6 (1–25) ---
-    const quizData = [
-      // 1
-      {
-        text: "¿Cómo aprende la máquina en el enfoque de aprendizaje por refuerzo?",
-        options: [
-          "Utilizando únicamente datos supervisados.",
-          "A través de la experiencia y ensayo-error.",
-          "Mostrándole miles de datos etiquetados.",
-          "Buscando similitudes entre datos sin etiquetas."
-        ],
-        correctIndex: 1
-      },
-      // 2
-      {
-        text: "¿Cómo se agrupa la inteligencia artificial?",
-        options: [
-          "IA débil y fuerte.",
-          "IA general y específica.",
-          "IA única y fuerte.",
-          "IA estrecha y débil."
-        ],
-        correctIndex: 0
-      },
-      // 3
-      {
-        text: "¿Qué tipo de Inteligencia Artificial se especializa en realizar una única tarea específica y no posee conciencia o autoconocimiento?",
-        options: [
-          "Superinteligencia Artificial (ASI).",
-          "Inteligencia Artificial Débil (IA Débil).",
-          "Inteligencia Artificial General (IAG).",
-          "Inteligencia Artificial Fuerte (IA Fuerte)."
-        ],
-        correctIndex: 1
-      },
-      // 4
-      {
-        text: "¿Cuál de las siguientes afirmaciones no es un requisito clave para que un sistema se considere “inteligencia artificial”?",
-        options: [
-          "Ser capaz de entender y procesar el lenguaje natural, tanto hablado como escrito.",
-          "Ser capaz de funcionar únicamente con intervención humana directa.",
-          "Ser capaz de aprender de la experiencia.",
-          "Ser capaz de adaptarse a diferentes situaciones y entornos sin intervención humana."
-        ],
-        correctIndex: 1
-      },
-      // 5
-      {
-        text: "El término empleado para describir el momento en el que la inteligencia artificial pueda programarse a sí misma se conoce como:",
-        options: [
-          "Cíborg.",
-          "Singularidad tecnológica.",
-          "Desarrollo exponencial.",
-          "Fusión hombre-máquina."
-        ],
-        correctIndex: 1
-      },
-      // 6
-      {
-        text: "¿Qué enfoques de enseñanza se utilizan en la actualidad para la IA?",
-        options: [
-          "Aprendizaje supervisado, no supervisado y por refuerzo.",
-          "Aprendizaje supervisado.",
-          "Aprendizaje por refuerzo y transferencia exclusivamente.",
-          "Aprendizaje supervisado y no supervisado."
-        ],
-        correctIndex: 0
-      },
-      // 7
-      {
-        text: "Los desarrolladores de IA, ¿en qué se enfocan para su creación?",
-        options: [
-          "En una amplia gama de capacidades diversas.",
-          "Exclusivamente en habilidades sociales.",
-          "Solo en la creatividad y la comprensión del lenguaje.",
-          "Únicamente en la capacidad de razonamiento lógico."
-        ],
-        correctIndex: 0
-      },
-      // 8
-      {
-        text: "Uno de los temores asociados con la IA avanzada es:",
-        options: [
-          "La imposibilidad de mejorar la capacidad de procesamiento de datos.",
-          "La aparición de máquinas superinteligentes que tomen el control sobre los humanos.",
-          "El desarrollo de una inteligencia artificial que no pueda superar la inteligencia humana.",
-          "La creación de una sociedad sin tecnologías más avanzadas de las que hay a día de hoy."
-        ],
-        correctIndex: 1
-      },
-      // 9
-      {
-        text: "Un ejemplo de fusión hombre-máquina que ya se utiliza hoy en día es:",
-        options: [
-          "Coches autónomos.",
-          "Asistentes de voz.",
-          "Implantes dentales.",
-          "Móviles."
-        ],
-        correctIndex: 2
-      },
-      // 10
-      {
-        text: "¿Qué avance fue clave en los años 2010 para que la inteligencia artificial pudiera realizar tareas complejas como el reconocimiento de imágenes?",
-        options: [
-          "Máquinas de soporte vectorial.",
-          "Redes neuronales y deep learning.",
-          "Algoritmos genéticos.",
-          "ChatGPT."
-        ],
-        correctIndex: 1
-      },
-      // 11
-      {
-        text: "La razón principal por la que el deep learning se considera más eficaz que el machine learning es porque:",
-        options: [
-          "Emplea árboles de elección.",
-          "Es una forma de trabajar mucho más barata.",
-          "El diseño de la red neuronal artificial se inspira en el cerebro humano.",
-          "Crea una red neuronal artificial que nunca comete errores."
-        ],
-        correctIndex: 2
-      },
-      // 12
-      {
-        text: "¿Qué inteligencia humana posibilita la observación del entorno para interpretarlo y, además, genera imágenes inexistentes?",
-        options: [
-          "Espacial.",
-          "Naturalista.",
-          "Musical.",
-          "Corporal."
-        ],
-        correctIndex: 0
-      },
-      // 13
-      {
-        text: "El principal objetivo de los cíborgs sería:",
-        options: [
-          "Limitar las capacidades naturales del ser humano.",
-          "Alimentar de conciencia humana a la tecnología.",
-          "Mejorar las capacidades del ser humano mediante la implantación de tecnología en su organismo.",
-          "Eliminar cualquier elemento tecnológico del organismo humano."
-        ],
-        correctIndex: 2
-      },
-      // 14
-      {
-        text: "¿Cuál es la definición de inteligencia según la teoría de Howard Gardner?",
-        options: [
-          "Capacidad mental de resolver problemas y/o elaborar productos valiosos para una cultura.",
-          "Aptitud general e innata.",
-          "Conjunto de habilidades lógico-matemáticas.",
-          "Medida específica de la capacidad verbal."
-        ],
-        correctIndex: 0
-      },
-      // 15
-      {
-        text: "¿Qué es ChatGPT?",
-        options: [
-          "Un lenguaje digital.",
-          "Un asistente virtual que te permite aprender.",
-          "Un asistente que permite modificar el entorno.",
-          "Una herramienta de comunicación entre empresas."
-        ],
-        correctIndex: 1
-      },
-      // 16
-      {
-        text: "¿Qué es un dato?",
-        options: [
-          "Una interpretación subjetiva de la realidad.",
-          "Un conjunto de decisiones tomadas en una empresa.",
-          "Un hecho registrado sin procesar y sin contexto.",
-          "Un gráfico que resume información."
-        ],
-        correctIndex: 2
-      },
-      // 17
-      {
-        text: "¿En qué fase del ciclo de vida del dato se generan dashboards, informes y gráficos?",
-        options: [
-          "Captura.",
-          "Almacenamiento.",
-          "Procesamiento y visualización.",
-          "Uso operativo."
-        ],
-        correctIndex: 2
-      },
-      // 18
-      {
-        text: "¿En qué ayuda principalmente el Big Data a una empresa?",
-        options: [
-          "A eliminar la necesidad de personal cualificado.",
-          "A descubrir patrones y tomar decisiones basadas en datos.",
-          "A evitar cualquier tipo de inversión tecnológica.",
-          "A reducir la cantidad de información disponible."
-        ],
-        correctIndex: 1
-      },
-      // 19
-      {
-        text: "Un ejemplo del uso del Big Data en sanidad es:",
-        options: [
-          "Imprimir recetas médicas en papel.",
-          "Guardar las historias clínicas en archivadores físicos.",
-          "Detectar enfermedades antes de que aparezcan síntomas.",
-          "Quitar la tecnología de los hospitales."
-        ],
-        correctIndex: 2
-      },
-      // 20
-      {
-        text: "En ciencia de datos, la fase en la que se visualizan datos, se buscan patrones y se detectan tendencias se llama:",
-        options: [
-          "Modelado de datos.",
-          "Implementación.",
-          "Análisis exploratorio de datos (EDA).",
-          "Definición del problema."
-        ],
-        correctIndex: 2
-      },
-      // 21
-      {
-        text: "¿Qué tipo de aprendizaje utiliza datos sin etiquetar para encontrar grupos o patrones?",
-        options: [
-          "Aprendizaje supervisado.",
-          "Aprendizaje no supervisado.",
-          "Aprendizaje por refuerzo.",
-          "Aprendizaje supervisado por refuerzo."
-        ],
-        correctIndex: 1
-      },
-      // 22
-      {
-        text: "¿Qué “V” del Big Data se refiere a la fiabilidad y exactitud de los datos?",
-        options: [
-          "Volumen.",
-          "Velocidad.",
-          "Veracidad.",
-          "Valor."
-        ],
-        correctIndex: 2
-      },
-      // 23
-      {
-        text: "Una Inteligencia Artificial que superara ampliamente la inteligencia humana en todos los ámbitos se denomina:",
-        options: [
-          "Inteligencia Artificial Débil.",
-          "Inteligencia Artificial General.",
-          "Superinteligencia Artificial (ASI).",
-          "Inteligencia Natural."
-        ],
-        correctIndex: 2
-      },
-      // 24
-      {
-        text: "¿Qué característica diferencia principalmente a la IA de un programa tradicional?",
-        options: [
-          "Que siempre necesita conexión a Internet.",
-          "Que puede aprender y adaptarse a partir de datos.",
-          "Que solo funciona con instrucciones fijas.",
-          "Que no puede tomar decisiones."
-        ],
-        correctIndex: 1
-      },
-      // 25
-      {
-        text: "¿Cómo se define la ciencia de datos?",
-        options: [
-          "Un conjunto de leyes para regular el uso de datos.",
-          "Un solo algoritmo usado para clasificar información.",
-          "Un campo multidisciplinar que extrae conocimiento de los datos usando métodos científicos.",
-          "Un servidor donde se almacenan grandes volúmenes de información."
-        ],
-        correctIndex: 2
-      }
-    ];
+    const correctAnswers = {
+      q1:'b', q2:'a', q3:'b', q4:'b', q5:'b',
+      q6:'a', q7:'a', q8:'b', q9:'c', q10:'b',
+      q11:'c', q12:'a', q13:'c', q14:'a', q15:'b',
+      q16:'c', q17:'c', q18:'b', q19:'c', q20:'c',
+      q21:'b', q22:'c', q23:'c', q24:'b', q25:'c',
+      q26:'a', q27:'b', q28:'c', q29:'c', q30:'a',
+      q31:'b', q32:'a', q33:'b', q34:'c', q35:'b',
+      q36:'b', q37:'b', q38:'a', q39:'c', q40:'b'
+    };
 
-    let currentQuestion = 0;
-    let score = 0;
+    const submitBtn = document.getElementById('submit-quiz');
+    const resetBtn = document.getElementById('reset-quiz');
+    const scoreEl = document.getElementById('score');
+    const correctionsEl = document.getElementById('corrections');
 
-    const questionEl = document.getElementById("quiz-question");
-    const optionsEl = document.getElementById("quiz-options");
-    const feedbackEl = document.getElementById("quiz-feedback");
-    const progressEl = document.getElementById("quiz-progress");
-    const nextBtn = document.getElementById("quiz-next");
+    submitBtn.addEventListener('click', () => {
+      let score = 0;
+      const total = Object.keys(correctAnswers).length;
+      const incorrect = [];
 
-    function renderQuestion() {
-      const q = quizData[currentQuestion];
-      questionEl.textContent = "Pregunta " + (currentQuestion + 1) + " de " + quizData.length + ": " + q.text;
+      Object.entries(correctAnswers).forEach(([q, correct], index) => {
+        const selected = document.querySelector(\`input[name="\${q}"]:checked\`);
+        const feedback = document.getElementById(\`feedback-\${q}\`);
+        const card = document.getElementById(\`card-\${q}\`);
 
-      optionsEl.innerHTML = "";
-      feedbackEl.textContent = "";
-      feedbackEl.style.color = "#e5e7eb";
+        // limpiar estilos previos
+        feedback.textContent = '';
+        feedback.classList.remove('correct', 'incorrect');
+        card.style.borderColor = 'rgba(148,163,184,.35)';
 
-      q.options.forEach((opt, index) => {
-        const id = "option-" + index;
-        const wrapper = document.createElement("div");
-        wrapper.style.marginBottom = "4px";
+        const title = card.querySelector('.question-title').textContent.trim();
+        const radios = card.querySelectorAll('input[type="radio"]');
+        let userAnswerText = 'No respondida';
+        let correctAnswerText = '';
 
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "quiz-option";
-        input.id = id;
-        input.value = index;
+        radios.forEach(r => {
+          const labelText = r.nextElementSibling.textContent.trim();
+          if (r.value === correct) {
+            correctAnswerText = labelText;
+          }
+          if (selected && r === selected) {
+            userAnswerText = labelText;
+          }
+        });
 
-        const label = document.createElement("label");
-        label.setAttribute("for", id);
-        label.style.marginLeft = "6px";
-        label.style.fontSize = "0.86rem";
-        label.textContent = opt;
+        if (!selected) {
+          feedback.textContent = '⚠️ Pregunta sin responder.';
+          feedback.classList.add('incorrect');
+          card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
+          return;
+        }
 
-        wrapper.appendChild(input);
-        wrapper.appendChild(label);
-        optionsEl.appendChild(wrapper);
+        if (selected.value === correct) {
+          score++;
+          feedback.textContent = '✅ Correcta';
+          feedback.classList.add('correct');
+          card.style.borderColor = '#4ade80';
+        } else {
+          feedback.textContent = '❌ Incorrecta';
+          feedback.classList.add('incorrect');
+          card.style.borderColor = '#f97373';
+          incorrect.push({
+            number: index + 1,
+            text: title,
+            userAnswer: userAnswerText,
+            correctAnswer: correctAnswerText
+          });
+        }
       });
 
-      progressEl.textContent = "Aciertos: " + score + " / " + quizData.length;
-    }
+      if (total === 0) return;
 
-    function showResults() {
-      questionEl.textContent = "Quiz completado ✅";
-      optionsEl.innerHTML = "";
-      const porcentaje = Math.round((score / quizData.length) * 100);
-      feedbackEl.textContent = "Has acertado " + score + " de " + quizData.length + " preguntas (" + porcentaje + "%).";
-      feedbackEl.style.color = "#4ade80";
-      nextBtn.disabled = true;
-      nextBtn.textContent = "Fin del cuestionario";
-    }
+      const grade = (score / total) * 10;
+      scoreEl.innerHTML = \`Has acertado <span>\${score}</span> de \${total} preguntas. Nota aproximada: <strong>\${grade.toFixed(2)} / 10</strong>.\`;
 
-    nextBtn.addEventListener("click", function () {
-      const selected = document.querySelector("input[name='quiz-option']:checked");
-      if (!selected) {
-        alert("Por favor, selecciona una respuesta antes de continuar.");
-        return;
-      }
-
-      const answer = parseInt(selected.value, 10);
-      const q = quizData[currentQuestion];
-
-      if (answer === q.correctIndex) {
-        score++;
-        feedbackEl.textContent = "✅ ¡Correcto!";
-        feedbackEl.style.color = "#4ade80";
+      if (incorrect.length === 0) {
+        correctionsEl.innerHTML = "<p>🎉 No has cometido ningún error. ¡Test perfecto!</p>";
       } else {
-        feedbackEl.textContent = "❌ Incorrecto. La respuesta correcta es: " + q.options[q.correctIndex];
-        feedbackEl.style.color = "#f97373";
-      }
-
-      currentQuestion++;
-
-      if (currentQuestion < quizData.length) {
-        setTimeout(renderQuestion, 700);
-      } else {
-        setTimeout(showResults, 700);
+        let html = "<p><strong>Errores y correcciones:</strong></p><ul>";
+        incorrect.forEach(item => {
+          html += "<li>";
+          html += "<strong>Pregunta " + item.number + ":</strong> " + item.text + "<br>";
+          html += "<span style='color:#f97373;'>Tu respuesta: " + item.userAnswer + "</span><br>";
+          html += "<span style='color:#4ade80;'>Respuesta correcta: " + item.correctAnswer + "</span>";
+          html += "</li>";
+        });
+        html += "</ul>";
+        correctionsEl.innerHTML = html;
       }
     });
 
-    // Inicializar
-    renderQuestion();
+    resetBtn.addEventListener('click', () => {
+      Object.keys(correctAnswers).forEach((q) => {
+        const feedback = document.getElementById(\`feedback-\${q}\`);
+        const card = document.getElementById(\`card-\${q}\`);
+        if (feedback) {
+          feedback.textContent = '';
+          feedback.classList.remove('correct', 'incorrect');
+        }
+        if (card) {
+          card.style.borderColor = 'rgba(148,163,184,.35)';
+        }
+      });
+      scoreEl.textContent = '';
+      correctionsEl.innerHTML = '';
+    });
   </script>
 </body>
 </html>
